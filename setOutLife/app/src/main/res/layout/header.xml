@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="165dp"
+    android:orientation="vertical"
+    android:weightSum="10"
+    android:gravity="bottom">
+
+    <View
+        android:layout_weight="5"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        />
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:gravity="bottom"
+        android:weightSum="10">
+        <ImageView
+            android:layout_weight="4"
+            android:layout_gravity="center"
+            android:layout_width="65dp"
+            android:layout_height="65dp"
+            android:src="@drawable/ic_default_user"/>
+
+        <TextView
+            android:fontFamily="@font/poppinsregular"
+            android:textStyle="bold"
+            android:layout_weight="6"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fahd Larayedh"
+            android:textSize="22sp"/>
+    </LinearLayout>
+
+
+<LinearLayout
+    android:layout_weight="1"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:weightSum="100">
+
+    <View
+        android:layout_height="0dp"
+        android:layout_weight="90"
+        android:layout_width="wrap_content"
+        />
+    <View
+        android:layout_weight="10"
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@color/lightGrey"
+        />
+
+</LinearLayout>
+
+
+
+<!--
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fahd.larayedh@gmail.com"/>
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="3dp"
+        android:background="@color/darkGrey"
+        android:layout_gravity="center"
+        android:layout_weight="6"/>
+        -->
+
+</LinearLayout>
