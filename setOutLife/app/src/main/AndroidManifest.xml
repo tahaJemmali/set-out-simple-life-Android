@@ -12,7 +12,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.features.CalandarActivity"></activity>
+        <activity android:name=".Activities.features.CalandarActivity" />
         <activity android:name=".Activities.tutorial.finance" />
         <activity android:name=".Activities.tutorial.gain" />
         <activity android:name=".Activities.tutorial.commun_task" />

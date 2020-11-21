@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/scrollViewTaskFragment"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:scrollbars="none"
-    tools:context=".Activities.LoginActivity"
-    android:fitsSystemWindows="true"
-    >
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.TaskFragment"
-    android:background="@drawable/yellow_background">
+    android:background="@drawable/yellow_background"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <include
             android:layout_width="match_parent"
@@ -27,19 +20,95 @@
             android:id="@+id/toolbar"
             layout="@layout/toolbar"/>
 
-        <include
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            layout="@layout/calander" />
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:background="@android:color/transparent" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/container"
+        android:orientation="vertical">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:background="@android:color/transparent" />
 
         <TextView
             android:gravity="center"
+            android:id="@+id/tvCurrentSelectedMonth"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/hello_blank_fragment" />
+            android:layout_height="wrap_content"
+            android:text="Month"
+            android:textColor="@color/redBord"
+            android:textSize="14dp"
+            android:textStyle="bold"
+            />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:background="@android:color/transparent" />
+
+        <devs.mulham.horizontalcalendar.HorizontalCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:textColorSelected="@color/orange"
+            app:selectedDateBackground="@drawable/selected_calendar_item_background"
+        />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:background="@android:color/transparent" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/tvCurrentSelectedDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Thursday, June 15, 2017"
+            android:textColor="@color/black"
+            android:textSize="13dp"
+            />
 
     </LinearLayout>
 
-</FrameLayout>
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="10dp"
+            android:layout_weight="0"
+            android:background="@android:color/transparent" />
 
-</ScrollView>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:background="@drawable/container"
+        android:orientation="vertical"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:listSelector="@color/darkGrey"
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:numColumns="auto_fit"
+            android:gravity="center">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </LinearLayout>
+    </LinearLayout>
+
+</FrameLayout>
