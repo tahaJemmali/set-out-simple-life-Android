@@ -214,7 +214,6 @@ public class TaskFragment extends Fragment {
             public void onDateSelected(Calendar date, int position) {
                 tvCurrentSelectedDate.setText(DateFormat.format("EEEE,  MMMM  d,  yyyy", date));
                 tvCurrentSelectedMonth.setText(DateFormat.format("MMMM", date));
-                //Toast.makeText(getContext(), DateFormat.format("EEEE, MMMM d, yyyy", date) + " is selected!", Toast.LENGTH_SHORT).show();
             }
         });
 

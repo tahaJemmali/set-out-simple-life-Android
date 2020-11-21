@@ -31,11 +31,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     NavigationView navigationView;
     androidx.appcompat.widget.Toolbar toolbar;
     ActionBarDrawerToggle toggle;
-    private boolean mToolBarNavigationListenerIsRegistered = false;
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
-    //Window w;
 
     private static User CurrentLoggedInUser;
     @Override
@@ -66,14 +64,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         //Default fragment
         if (savedInstanceState == null){ //rotation thing solver
             addHomeFragment(null);
-            //navigationView.setCheckedItem(R.id.nav_home);
         }
         navigationView.setNavigationItemSelectedListener(this);
 
-        //toggleFullscreen(false);
-        //w = getWindow();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
@@ -135,20 +129,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void addHomeFragment(Bundle bundle) {
         fragmentTransaction = fragmentManager.beginTransaction();
         HomeFragment homeFragment = new HomeFragment();
-        //forumFragment.setArguments(bundle);
         homeFragment.setCallBackInterface(this);
-        //fragmentTransaction.setCustomAnimations( R.anim.slide_in_up, R.anim.slide_out_down);
         fragmentTransaction.replace(R.id.fragment_container,homeFragment);
-        //fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
 
     private void addProfilFragment(Bundle bundle,Boolean fromNavBar) {
         fragmentTransaction = fragmentManager.beginTransaction();
         ProfilFragment profilFragment = new ProfilFragment();
-        //forumFragment.setArguments(bundle);
         profilFragment.setCallBackInterface(this);
-        //fragmentTransaction.setCustomAnimations( R.anim.slide_in_up, R.anim.slide_out_down);
         fragmentTransaction.replace(R.id.fragment_container,profilFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -157,9 +146,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void addForumFragment(Bundle bundle,Boolean fromNavBar) {
         fragmentTransaction = fragmentManager.beginTransaction();
         ForumFragment forumFragment = new ForumFragment();
-        //forumFragment.setArguments(bundle);
         forumFragment.setCallBackInterface(this);
-        //fragmentTransaction.setCustomAnimations( R.anim.slide_in_up, R.anim.slide_out_down);
         fragmentTransaction.replace(R.id.fragment_container,forumFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -168,9 +155,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     private void addTaskFragment(Bundle bundle,Boolean fromNavBar) {
         fragmentTransaction = fragmentManager.beginTransaction();
         TaskFragment taskFragment = new TaskFragment();
-        //forumFragment.setArguments(bundle);
         taskFragment.setCallBackInterface(this);
-        //fragmentTransaction.setCustomAnimations( R.anim.slide_in_up, R.anim.slide_out_down);
         fragmentTransaction.replace(R.id.fragment_container,taskFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
@@ -186,34 +171,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return super.onOptionsItemSelected(item);
     }
 
-    /*@Override
-    public void showHamburgerIcon() {
-        getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-        toggle.setDrawerIndicatorEnabled(true);
-    }
 
-    @Override
-    public void showBackIcon() {
-        toggle.setDrawerIndicatorEnabled(false);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }*/
 
     @Override
     public void popBack() {
         fragmentManager.popBackStack();
         addHomeFragment(null);
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
-        //onResume();
-        //getSupportActionBar().setTitle("Welcome "+"Fahd !");
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(false);
         System.out.println("pop back interface ceolled in homeActivity");
         toggleFullscreen(false);
-        //toggle.setDrawerIndicatorEnabled(true);
-        //toggle.syncState();
-        /*System.out.println(w);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
-        }*/
+
     }
 
     @Override
@@ -248,9 +215,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            toggleFullscreen(true);
-        }*/
     }
 
     private void toggleFullscreen(boolean fullscreen)
