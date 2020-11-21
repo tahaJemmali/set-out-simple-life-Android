@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.HomeFragment"
+    android:background="@drawable/light_orange_background">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+
+        <TextView
+            android:id="@+id/tvLogo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="0"
+            android:fontFamily="@font/pacifico"
+            android:includeFontPadding="false"
+            android:text="Set Out - Simple Life"
+            android:textColor="@android:color/white"
+            android:textSize="35sp" />
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="20dp">
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profilImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/ic_default_user"
+            app:civ_border_width="1dp"
+            app:civ_border_color="@color/colorPrimaryDark"
+            />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_weight="2"
+            >
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Fahd"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+        <TextView
+            android:gravity="bottom"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text=" Lv. 0"
+            android:textStyle="bold"
+            android:textSize="17sp"/>
+        </LinearLayout>
+
+       <!-- <Button
+            android:layout_gravity="center"
+            android:id="@+id/forumBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Forum Fragment"/>
+-->
+    </LinearLayout>
+       <!-- <View
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:background="@android:color/transparent" />
+        <ImageButton
+            android:layout_gravity="bottom"
+            android:id="@+id/navBarBtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/ic_nav_bar"
+            android:scaleType="fitXY"
+            android:background="@android:color/transparent"/>
+        -->
+        <LinearLayout
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="@drawable/orange_background">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:listSelector="@color/darkGrey"
+                android:id="@+id/rv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:numColumns="auto_fit"
+                android:columnWidth="120dp"
+                android:gravity="center"
+                android:layout_margin="5dp">
+            </androidx.recyclerview.widget.RecyclerView>
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
