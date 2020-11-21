@@ -16,5 +16,6 @@
     <color name="veryLightGrey">#f0f0f0</color>
     <color name="purple">#7d64e6</color>
     <color name="yellow">#ffee00</color>
+    <color name="redBord">#FF5959</color>
 
 </resources>

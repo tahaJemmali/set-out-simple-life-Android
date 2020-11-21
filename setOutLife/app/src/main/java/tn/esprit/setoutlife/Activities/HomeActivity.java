@@ -1,5 +1,6 @@
 package tn.esprit.setoutlife.Activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ import tn.esprit.setoutlife.Fragments.ProfilFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Utils.CallBackInterface;
+import tn.esprit.setoutlife.entities.User;
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, CallBackInterface {
 
@@ -35,12 +37,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FragmentTransaction fragmentTransaction;
     //Window w;
 
+    private static User CurrentLoggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        /************************ fragment manager ********************************/
+    /************************ fragment manager ********************************/
         fragmentManager = getSupportFragmentManager();
 
     /************************ Hooks ********************************/
@@ -264,5 +267,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setAttributes(attrs);
     }
 
+
+
+
+    public static User getCurrentLoggedInUser(){
+        return CurrentLoggedInUser;
+    }
+
+    public static void setCurrentLoggedInUser (User user){
+        CurrentLoggedInUser=user;
+    }
 
 }

@@ -26,6 +26,7 @@ import retrofit2.Retrofit;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Retrofit.INodeJsService;
 import tn.esprit.setoutlife.Retrofit.RetrofitClient;
+import tn.esprit.setoutlife.entities.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -40,6 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     boolean cbState ;
 
     public static final String SHARED_PREFS = "SharedPrefsFile" ;
+
     public static final String EMAIL = "email" ;
     public static final String PASSWORD = "password" ;
     public static final String CHECKBOX = "cbRememberMe" ;
@@ -70,9 +72,9 @@ public class LoginActivity extends AppCompatActivity {
 
     public void initUI(){
 
-        Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(EMAIL, ""));
-        Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(PASSWORD, ""));
-        Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getBoolean(CHECKBOX, false) );
+        //Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(EMAIL, ""));
+        //Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(PASSWORD, ""));
+        //Log.e("Testing", ":"+getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getBoolean(CHECKBOX, false) );
 
         scrollView  = findViewById(R.id.scrollView);
         signUpBtn = findViewById(R.id.signUpBtn);
@@ -136,7 +138,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    void loginUser(String email,String password){
+    void loginUser(final String email,final String password){
         try {
             compositeDisposable.add(iNodeJsService.loginUser(email,password)
                     .subscribeOn(Schedulers.io())
@@ -145,6 +147,9 @@ public class LoginActivity extends AppCompatActivity {
                                    Toast.makeText(LoginActivity.this,""+response,Toast.LENGTH_SHORT).show();
                                    if (response.contains("Login success")){
                                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                        /************************ Load User **************************/
+                                       //HomeActivity.setCurrentLoggedInUser(loadUserFromJson());
+
                                        startActivity(intent);
                                    }
                                } },
@@ -200,4 +205,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
     }
+
+    User loadUserFromJson(String email){
+        User user = new User();
+
+        return null;
+
+    }
+
 }
