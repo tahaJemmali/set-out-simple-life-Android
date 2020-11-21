@@ -1,4 +1,4 @@
-package tn.esprit.setoutsimplelife.tutorial;
+package tn.esprit.setoutlife.Activities.tutorial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import tn.esprit.setoutsimplelife.R;
+import tn.esprit.setoutlife.R;
 
 public class welcome extends AppCompatActivity {
 

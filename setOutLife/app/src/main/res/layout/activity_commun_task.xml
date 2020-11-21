@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/welcome"
     android:orientation="vertical"
-    tools:context=".tutorial.commun_task">
+    tools:context=".Activities.tutorial.commun_task">
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

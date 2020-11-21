@@ -23,6 +23,7 @@ import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
+import tn.esprit.setoutlife.Activities.tutorial.welcome;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Retrofit.INodeJsService;
 import tn.esprit.setoutlife.Retrofit.RetrofitClient;
@@ -38,11 +39,13 @@ public class LoginActivity extends AppCompatActivity {
     String email ;
     String password;
     boolean cbState ;
+    boolean DoTutorial;
 
     public static final String SHARED_PREFS = "SharedPrefsFile" ;
     public static final String EMAIL = "email" ;
     public static final String PASSWORD = "password" ;
     public static final String CHECKBOX = "cbRememberMe" ;
+    public static final String TUTORIAL = "tutorial" ;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     INodeJsService iNodeJsService;
@@ -145,7 +148,11 @@ public class LoginActivity extends AppCompatActivity {
                                    Toast.makeText(LoginActivity.this,""+response,Toast.LENGTH_SHORT).show();
                                    if (response.contains("Login success")){
                                        Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
+                                       if(DoTutorial){
+                                           intent = new Intent(LoginActivity.this, welcome.class);
+                                       }
                                        startActivity(intent);
+                                       finish();
                                    }
                                } },
                             new Consumer<Throwable>() { @Override public void accept(Throwable throwable) throws Exception {
@@ -162,6 +169,7 @@ public class LoginActivity extends AppCompatActivity {
         email = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(EMAIL, "");
         password = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getString(PASSWORD, "");
         cbState = getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getBoolean(CHECKBOX, false);
+        DoTutorial= getSharedPreferences(SHARED_PREFS, MODE_PRIVATE).getBoolean(TUTORIAL, true);
     }
 
     public void updatePreference() {

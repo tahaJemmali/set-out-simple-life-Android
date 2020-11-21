@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/welcome"
-    tools:context=".tutorial.welcome">
+    tools:context=".Activities.tutorial.welcome">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"

@@ -1,4 +1,4 @@
-package tn.esprit.setoutsimplelife.tutorial;
+package tn.esprit.setoutlife.Activities.tutorial;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,19 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import tn.esprit.setoutsimplelife.R;
+import tn.esprit.setoutlife.R;
 
-public class simple_task extends AppCompatActivity {
+public class project_schema extends AppCompatActivity {
 Button next;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_simple_task);
-        next=findViewById(R.id.btnNextSimple);
+        setContentView(R.layout.activity_project_schema);
+        next=findViewById(R.id.btnNextProjectSchema);
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(simple_task.this,project_schema.class));
+                startActivity(new Intent(project_schema.this,commun_task.class));
             }
         });
     }
