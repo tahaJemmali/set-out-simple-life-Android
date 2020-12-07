@@ -86,34 +86,6 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
                 }
             });
 
-           /* itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View view) {
-                    int position = getAdapterPosition();
-                    if (position != RecyclerView.NO_POSITION){
-                        System.out.println(position+" is beign long pressed !");
-                    }
-                    return true;
-                }
-            });
-               */
-            /*
-            itemView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            handler.postDelayed(run, 5000);
-                            break;
-
-                        default:
-                            handler.removeCallbacks(run);
-                            break;
-
-                    }
-                    return true;
-                }
-            });*/
         }
 
     }

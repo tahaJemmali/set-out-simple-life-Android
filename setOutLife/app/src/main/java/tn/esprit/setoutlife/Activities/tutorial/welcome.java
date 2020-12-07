@@ -20,7 +20,8 @@ public class welcome extends AppCompatActivity {
         go.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(welcome.this,simple_task.class));
+                Intent intent = new Intent(welcome.this,simple_task.class);
+                startActivity(intent);
             }
         });
     }

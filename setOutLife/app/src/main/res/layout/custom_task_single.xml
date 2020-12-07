@@ -21,9 +21,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal"
             android:layout_weight="95"
-            android:background="@drawable/single_tag">
-
-        </LinearLayout>
+            android:background="@drawable/single_tag"/>
 
         <LinearLayout
             android:layout_weight="5"

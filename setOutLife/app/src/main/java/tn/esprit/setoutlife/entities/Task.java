@@ -1,44 +1,136 @@
 package tn.esprit.setoutlife.entities;
 
+import java.util.Date;
+
 public class Task {
-    String name;
-    String description;
-    String color;
+    String id;
+    String taskName;
+    int importance;
+    int enjoyment;
+    String note;
+    Date dateCreation;
+    Date deadline;
+    Date reminder;
+    Date endTime;
+    boolean schedule=false;
+    public Task(){
 
-    public Task() { }
-
-    public Task(String name,String description,String color) {
-        this.name=name;
-        this.description=description;
-        this.color=color;
+    }
+    //Schedule
+    public Task(String id,String taskName, int importance, int enjoyment, String note, Date dateCreation, Date endTime, boolean schedule) {
+        this.id = id;
+        this.taskName = taskName;
+        this.importance = importance;
+        this.enjoyment = enjoyment;
+        this.note = note;
+        this.dateCreation = dateCreation;
+        this.endTime = endTime;
+        this.schedule = schedule;
     }
 
-    public Task(String name,String description ) {
-        this.name=name;
-        this.description=description;
+    //Task
+    public Task(String id,String taskName, Date dateCreation,Date deadline,Date reminder,int importance, int enjoyment, String note,boolean schedule) {
+        this.id = id;
+        this.taskName = taskName;
+        this.importance = importance;
+        this.enjoyment = enjoyment;
+        this.note = note;
+        this.dateCreation = dateCreation;
+        this.deadline = deadline;
+        this.reminder = reminder;
+        this.schedule = schedule;
     }
 
-    public String getColor() {
-        return color;
+    public String getTaskName() {
+        return taskName;
     }
 
-    public String getDescription() {
-        return description;
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
     }
 
-    public String getName() {
-        return name;
+    public int getImportance() {
+        return importance;
     }
 
-    public void setColor(String color) {
-        this.color = color;
+    public void setImportance(int importance) {
+        this.importance = importance;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public int getEnjoyment() {
+        return enjoyment;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEnjoyment(int enjoyment) {
+        this.enjoyment = enjoyment;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
+    }
+
+    public Date getDateCreation() {
+        return dateCreation;
+    }
+
+    public void setDateCreation(Date dateCreation) {
+        this.dateCreation = dateCreation;
+    }
+
+    public Date getDeadline() {
+        return deadline;
+    }
+
+    public void setDeadline(Date deadline) {
+        this.deadline = deadline;
+    }
+
+    public Date getReminder() {
+        return reminder;
+    }
+
+    public void setReminder(Date reminder) {
+        this.reminder = reminder;
+    }
+
+
+    public Date getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(Date endTime) {
+        this.endTime = endTime;
+    }
+
+    public boolean isSchedule() {
+        return schedule;
+    }
+
+    public void setSchedule(boolean schedule) {
+        this.schedule = schedule;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id='" + id + '\'' +
+                ", taskName='" + taskName + '\'' +
+                ", importance=" + importance +
+                ", enjoyment=" + enjoyment +
+                ", note='" + note + '\'' +
+                ", dateCreation=" + dateCreation +
+                ", deadline=" + deadline +
+                ", reminder=" + reminder +
+                ", endTime=" + endTime +
+                ", schedule=" + schedule +
+                '}';
+    }
+
+    public String getId() {
+        return id;
     }
 }

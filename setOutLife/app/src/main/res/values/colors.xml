@@ -5,7 +5,6 @@
     <color name="colorAccent">#121212</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
-
     <color name="lightGrey">#E8EBEC</color>
     <color name="darkGrey">#A5A8A9</color>
     <color name="darkGrey2">#8F9191</color>
@@ -17,5 +16,12 @@
     <color name="purple">#7d64e6</color>
     <color name="yellow">#ffee00</color>
     <color name="redBord">#FF5959</color>
+    <color name="red">#FF0000</color>
+    <color name="transparent">#80000000</color>
+    <color name="skyBlue">#00bfff</color>
+    <color name="blue">#0040ff</color>
+
+
+
 
 </resources>
