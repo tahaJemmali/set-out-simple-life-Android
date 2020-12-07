@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="tn.esprit.setoutlife">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/logo"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/logo"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+
+        <receiver android:name="com.allyants.notifyme.NotificationPublisher" />
+
+        <!--
+               Set to true if your app is Standalone, that is, it does not require the handheld
+               app to run.
+        -->
+
+        <activity android:name=".Activities.Settings.PersonalInfo.EmailActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.Settings.PersonalInfoActivity" />
+        </activity>
+        <activity android:name=".Activities.Settings.PersonalInfo.NameActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.Settings.PersonalInfoActivity" />
+        </activity>
+        <activity android:name=".Activities.Settings.PersonalInfoActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.SettingsActivity" />
+        </activity>
+        <activity android:name=".Activities.tutorial.finance" />
+        <activity android:name=".Activities.Forum.AddPostActivity" />
+        <activity android:name=".Activities.ResetPasswordActivity" />
+        <activity android:name=".Activities.tutorial.gain" />
+        <activity android:name=".Activities.tutorial.commun_task" />
+        <activity android:name=".Activities.tutorial.project_schema" />
+        <activity android:name=".Activities.tutorial.simple_task" />
+        <activity android:name=".Activities.tutorial.welcome" />
+        <activity android:name=".Activities.VerifyCodeActivity" />
+        <activity android:name=".Activities.ForgetPasswordActivity" android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".Activities.SignUpActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Activities.LoginActivity" />
+        </activity>
+        <activity android:name=".Activities.Forum.CommentsActivity"/>
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activities.Profile.ProfileActivity">
+        </activity>
+
+        <activity android:name=".Activities.HomeActivity" />
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+        <activity
+            android:name="com.facebook.FacebookActivity"
+            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+            android:label="@string/app_name" />
+    </application>
+
+</manifest>
