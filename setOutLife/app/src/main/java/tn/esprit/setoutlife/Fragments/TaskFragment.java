@@ -161,10 +161,12 @@ public class TaskFragment extends Fragment {
         rv = view.findViewById(R.id.rv);
 
         ArrayList projects = new ArrayList<Project>();
+if(global != null){
+    for (Project row:global){
+        projects.add(row);
+    }
+}
 
-        for (Project row:global){
-            projects.add(row);
-        }
 
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
         projectListAdapter = new ProjectListAdapter(mContext, projects);

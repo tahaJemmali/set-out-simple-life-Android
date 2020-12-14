@@ -21,6 +21,7 @@ import java.io.UnsupportedEncodingException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import tn.esprit.setoutlife.Fragments.AddProjectFragment;
@@ -60,6 +61,10 @@ public class TaskRepository {
     }
     public static void addTask(Context mcontext, Task task)throws UnsupportedEncodingException {
         JSONObject object = new JSONObject();
+        Calendar cal = Calendar.getInstance(); // creates calendar
+        cal.setTime(task.getDateCreation());    // sets calendar time/date
+        cal.add(Calendar.HOUR_OF_DAY, 1);      // adds one hour
+        task.setEndTime(cal.getTime());
         try {
             //input your API parameters
             object.put("taskName",task.getTaskName());
@@ -69,7 +74,8 @@ public class TaskRepository {
             object.put("dateCreation",task.getDateCreation());
             object.put("deadline",task.getDeadline());
             object.put("reminder",task.getReminder());
-            object.put("schedule",false);
+            object.put("endTime",task.getEndTime());
+            object.put("schedule",true);
         } catch (JSONException e) {
             e.printStackTrace();
         }
