@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@drawable/single_task"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    android:layout_height="wrap_content">
+    <ImageView
+        android:id="@+id/balanceArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginHorizontal="12dp"
+        android:background="@android:color/transparent"
+        android:src="@drawable/greenarrow_balance"/>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="23dp"
+        android:orientation="horizontal">
+        <View
+            android:id="@+id/balanceTagColor"
+            android:layout_width="19dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="4dp"
+            android:background="@drawable/circulartag" />
+
+        <TextView
+            android:id="@+id/balanceName"
+            android:layout_width="130dp"
+            android:layout_gravity="center"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="19dp"
+            android:layout_weight="1"
+            android:text="balance"
+            android:textColor="@color/black"
+            android:textSize="20dp" />
+<LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <TextView
+        android:id="@+id/dateBalance"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+            android:layout_gravity="center"
+        android:gravity="center"
+            android:textSize="15dp"
+        android:layout_height="wrap_content"
+        android:text="20/12/2020"/>
+    <TextView
+        android:id="@+id/amountBalance"
+        android:layout_width="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:fontFamily="@font/poppinsblack"
+        android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:text="+20"/>
+</LinearLayout>
+    </LinearLayout>
+</LinearLayout>

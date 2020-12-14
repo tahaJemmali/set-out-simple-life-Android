@@ -51,7 +51,6 @@
             android:orientation="vertical"
             android:padding="20dp"
             android:weightSum="100">
-
             <RelativeLayout
                 android:id="@+id/relativeLayout"
                 android:layout_width="match_parent"
@@ -88,6 +87,7 @@
                     android:layout_alignParentRight="true"
                     />-->
             </RelativeLayout>
+
             <!--android:textColorHint="@android:color/black"-->
 
             <View

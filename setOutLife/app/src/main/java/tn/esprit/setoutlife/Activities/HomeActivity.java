@@ -17,9 +17,11 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
 
+import tn.esprit.setoutlife.Fragments.FinanceFragment;
 import tn.esprit.setoutlife.Fragments.ForumFragment;
 import tn.esprit.setoutlife.Fragments.HomeFragment;
 import tn.esprit.setoutlife.Fragments.ProfilFragment;
+import tn.esprit.setoutlife.Fragments.ScheduleFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Utils.CallBackInterface;
@@ -96,14 +98,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 addProfilFragment(null,true);
                 break;
             case R.id.nav_Schedule:
-                return false;
-                //break;
+                addScheduleFragment(null,true);
+                break;
             case R.id.nav_Tasks:
-                return false;
+                addTaskFragment(null,true);
+                break;
             //break;
             case R.id.nav_Finance:
-                return false;
-            //break;
+                addFinanceFragment(null,true);
+                break;
             case R.id.nav_ProgressAndStatistics:
                 return false;
             //break;
@@ -139,6 +142,23 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         ProfilFragment profilFragment = new ProfilFragment();
         profilFragment.setCallBackInterface(this);
         fragmentTransaction.replace(R.id.fragment_container,profilFragment);
+        if (!fromNavBar) fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+    private void addScheduleFragment(Bundle bundle,Boolean fromNavBar) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        ScheduleFragment scheduleFragment = new ScheduleFragment();
+        scheduleFragment.setCallBackInterface(this);
+        fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
+        if (!fromNavBar) fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
+    private void addFinanceFragment(Bundle bundle,Boolean fromNavBar) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        FinanceFragment financeFragment = new FinanceFragment();
+        financeFragment.setCallBackInterface(this);
+        fragmentTransaction.replace(R.id.fragment_container,financeFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
@@ -190,13 +210,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 toggleFullscreen(true);
                 navigationView.setCheckedItem(R.id.nav_Profil);
                 break;
-            case "Schedule":// TODO addScheduleFragment(null);
+            case "Schedule":addScheduleFragment(null,false);
+                toggleFullscreen(true);
+                navigationView.setCheckedItem(R.id.nav_Schedule);
                 break;
             case "Tasks":addTaskFragment(null,false);
                 toggleFullscreen(true);
-                navigationView.setCheckedItem(R.id.nav_Profil);
+                navigationView.setCheckedItem(R.id.nav_Tasks);
                 break;
-            case "Finance"://TODO addFinanceFragment(null);
+            case "Finance":
+                addFinanceFragment(null,false);
+                toggleFullscreen(true);
+                navigationView.setCheckedItem(R.id.nav_Finance);
                 break;
             case "Progress & Statistics"://TODO addProgressStatFragment(null);
                 break;

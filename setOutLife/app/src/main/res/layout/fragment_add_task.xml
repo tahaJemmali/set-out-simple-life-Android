@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#80000000"
+    tools:context=".Fragments.AddTaskFragment"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- TODO: Update blank fragment layout -->
+
+    <LinearLayout
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:layout_weight="10"
+        android:background="@drawable/container"
+        android:orientation="vertical"
+        android:padding="15dp"
+        android:weightSum="100">
+        <ImageButton
+            android:id="@+id/closeTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:layout_gravity="right"
+            android:background="@android:color/transparent"
+            android:src="@drawable/cancelbtn" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Task Name"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:layout_marginRight="20dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/taskNameEditText"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:dropDownHeight="match_parent"
+                android:hint="task"
+                android:includeFontPadding="false"
+                android:inputType="textEmailAddress"
+                android:padding="20dp"
+                android:visibility="visible"
+                android:textSize="15dp"
+                android:backgroundTintMode="screen"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/poppinsbold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tags"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:layout_marginRight="20dp"
+                android:textStyle="bold" />
+            <View
+                android:id="@+id/tagColor"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:orientation="horizontal"
+                android:layout_gravity="center"
+                android:background="@drawable/circulartag" />
+            <Spinner
+                android:id="@+id/tagsPicker"
+                android:layout_width="fill_parent"
+                android:layout_height="47dp"
+                android:drawSelectorOnTop="true"
+                android:entries="@array/tags"
+                android:backgroundTintMode="screen"
+                android:backgroundTint="@color/colorPrimary"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Deadline"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <DatePicker
+                android:id="@+id/deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="89dp"
+                android:layout_weight="1"
+                android:backgroundTintMode="screen"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:text="Importance"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold"
+                android:layout_marginRight="20dp"/>
+            <NumberPicker
+                android:id="@+id/importance"
+                android:layout_width="wrap_content"
+                android:layout_height="89dp"
+                android:layout_weight="1"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="93dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Reminder"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+            <DatePicker
+                android:id="@+id/reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="89dp"
+                android:layout_weight="1"
+                android:backgroundTintMode="screen"
+                android:calendarViewShown="false"
+                android:datePickerMode="spinner"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center"
+                android:layout_marginRight="20dp"
+                android:text="Enjoyment"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:textStyle="bold" />
+
+            <NumberPicker
+                android:id="@+id/enjoyment"
+                android:layout_width="wrap_content"
+                android:layout_height="89dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Notes"
+                android:layout_gravity="center"
+                android:textColor="@color/colorPrimary"
+                android:textSize="19sp"
+                android:layout_marginRight="20dp"
+                android:textStyle="bold" />
+            <EditText
+                android:id="@+id/noteEditText"
+                android:layout_weight="1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:dropDownHeight="match_parent"
+                android:hint="Description, links..."
+                android:includeFontPadding="false"
+                android:inputType="textEmailAddress"
+                android:padding="20dp"
+                android:visibility="visible"
+                android:textSize="15dp"
+                android:backgroundTintMode="screen"
+                android:backgroundTint="@color/colorPrimary"
+                android:fontFamily="@font/poppinsbold"/>
+        </LinearLayout>
+
+        <ImageButton
+            android:id="@+id/addTaskBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/addbtn" />
+    </LinearLayout>
+
+</ScrollView>
