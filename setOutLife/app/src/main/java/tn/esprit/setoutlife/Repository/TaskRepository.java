@@ -24,6 +24,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Fragments.AddProjectFragment;
 import tn.esprit.setoutlife.Fragments.AddTaskFragment;
 import tn.esprit.setoutlife.Fragments.ScheduleFragment;
@@ -126,7 +127,7 @@ public class TaskRepository {
         VolleyInstance.getInstance(mContext).addToRequestQueue(request);
     }
     public static void  getAllTasks(Context mContext){
-
+        System.out.println("Current user : " + HomeActivity.getCurrentLoggedInUser().getId());
         JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tasks", null,
                 new Response.Listener<JSONObject>() {
                     @Override

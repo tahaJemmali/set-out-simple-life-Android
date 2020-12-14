@@ -29,10 +29,10 @@
             android:icon="@drawable/ic_finance"
             android:title="Finance"></item>
 
-        <item
+       <!-- <item
             android:id="@+id/nav_ProgressAndStatistics"
             android:icon="@drawable/ic_stat"
-            android:title="Progress &amp; Statistics"></item>
+            android:title="Progress &amp; Statistics"></item>-->
 
         <item
             android:id="@+id/nav_Forum"
@@ -44,10 +44,10 @@
     <item android:title="">  <!-- title -->
         <menu>
             <group android:checkableBehavior="single">
-            <item
+            <!--<item
                 android:id="@+id/nav_notification"
                 android:icon="@drawable/ic_notification"
-                android:title="Notification"></item>
+                android:title="Notification"></item>-->
 
             <item
                 android:id="@+id/nav_settings"
