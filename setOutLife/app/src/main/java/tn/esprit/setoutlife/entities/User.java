@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class User implements Parcelable {
 
+    String id;
     String firstName;
     String lastName;
     String email;
@@ -77,6 +78,14 @@ public class User implements Parcelable {
         this.address = address;
         this.phone = phone;
         this.phone = photo;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getFirstName() {

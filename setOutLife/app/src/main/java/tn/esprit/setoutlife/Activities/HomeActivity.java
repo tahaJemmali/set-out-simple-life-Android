@@ -22,6 +22,7 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.navigation.NavigationView;
 import com.squareup.picasso.Picasso;
 
+import tn.esprit.setoutlife.Activities.tutorial.welcome;
 import tn.esprit.setoutlife.Fragments.FinanceFragment;
 import tn.esprit.setoutlife.Fragments.ForumFragment;
 import tn.esprit.setoutlife.Fragments.HomeFragment;
@@ -320,7 +321,9 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 //toggleFullscreen(true);
                 navigationView.setCheckedItem(R.id.nav_settings);
                 break;
-            case "Tutorial"://TODO addTutorialFragment(null);
+            case "Tutorial":
+                Intent intent = new Intent(HomeActivity.this, welcome.class);
+                startActivity(intent);
                 break;
             case "Notification"://TODO addForumFragment(null);
                 break;

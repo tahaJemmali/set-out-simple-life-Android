@@ -28,8 +28,8 @@ import tn.esprit.setoutlife.entities.User;
 public class PostRepository {
 
     private static PostRepository instance;
-    private String baseURL = "http://10.0.2.2:3000";
-    //private String baseURL = "https://set-out.herokuapp.com";
+    //private String baseURL = "http://10.0.2.2:3000";
+    private String baseURL = "https://set-out.herokuapp.com";
     private IRepository iRepository;
     ArrayList<Post> postArrayList;
     ArrayList<Comment> commentArrayList;

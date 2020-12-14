@@ -18,7 +18,7 @@ android:background="?android:attr/selectableItemBackground">
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="@color/transparent" />
+     />
 
     <TextView
         android:id="@+id/tvSettingName"
@@ -39,7 +39,7 @@ android:background="?android:attr/selectableItemBackground">
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="@color/transparent" />
+  />
 
 </LinearLayout>
 

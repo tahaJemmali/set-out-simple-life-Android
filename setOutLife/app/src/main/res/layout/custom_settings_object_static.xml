@@ -16,7 +16,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="@color/transparent" />
+  />
 
     <TextView
         android:id="@+id/tvSettingName"
@@ -37,7 +37,7 @@
     <View
         android:layout_width="wrap_content"
         android:layout_height="10dp"
-        android:background="@color/transparent" />
+        />
 </LinearLayout>
 
     <View

@@ -337,21 +337,25 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
                         User user = new User();
                         user.setLastName(object.getString("last_name"));
                         user.setFirstName(object.getString("first_name"));
-                        user.setEmail(object.getString("email"));
+                        //user.setEmail(object.getString("email"));
+                        user.setEmail("tahajammali@esprit.tn");
                         String id = object.getString("id");
                         user.setSigned_up_with("Facebook");
                         //System.out.println(object.getString("birthday"));
                         //System.out.println(object.getString("hometown"));
 
                             Date date = null;
-                            try {
-                                SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-                                date = format.parse((object.getString("birthday")));
-                                user.setBirth_date(date);
-                                //user.setSign_up_date(date);
-                            } catch (java.text.ParseException e) {
-                                e.printStackTrace();
+                            if(object.has("birthday")){
+                                try {
+                                    SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+                                    date = format.parse((object.getString("birthday")));
+                                    user.setBirth_date(date);
+                                    //user.setSign_up_date(date);
+                                } catch (java.text.ParseException e) {
+                                    e.printStackTrace();
+                                }
                             }
+
 
                         Date date2 = null;
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
@@ -439,9 +443,9 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
     @Override
     public void doAction() {
         Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-       /*if(DoTutorial){
+       if(DoTutorial){
         intent = new Intent(LoginActivity.this, welcome.class);
-       }*/
+       }
        startActivity(intent);
        finish();
     }

@@ -98,7 +98,7 @@ public class UserRepository {
                             System.out.println(jsonObject);
 
                             User user = new User();
-
+                                user.setId(jsonObject.getString("_id"));
                                 user.setFirstName(jsonObject.getString("firstName"));
                                 user.setLastName(jsonObject.getString("lastName"));
                                 user.setEmail(jsonObject.getString("email"));
