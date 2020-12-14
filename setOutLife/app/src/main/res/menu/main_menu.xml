@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <group android:checkableBehavior="single">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home"
+        android:title="Home"></item>
+
+    <item
+        android:id="@+id/nav_Profil"
+        android:icon="@drawable/ic_profil"
+        android:title="Profil"></item>
+
+    <item
+        android:id="@+id/nav_Schedule"
+        android:icon="@drawable/ic_schedual"
+        android:title="Schedule">
+    </item>
+
+        <item
+            android:id="@+id/nav_Tasks"
+            android:icon="@drawable/ic_task"
+            android:title="Tasks"></item>
+
+        <item
+            android:id="@+id/nav_Finance"
+            android:icon="@drawable/ic_finance"
+            android:title="Finance"></item>
+
+       <!-- <item
+            android:id="@+id/nav_ProgressAndStatistics"
+            android:icon="@drawable/ic_stat"
+            android:title="Progress &amp; Statistics"></item>-->
+
+        <item
+            android:id="@+id/nav_Forum"
+            android:icon="@drawable/ic_forum"
+            android:title="Forum"></item>
+
+
+
+    <item android:title="">  <!-- title -->
+        <menu>
+            <group android:checkableBehavior="single">
+            <!--<item
+                android:id="@+id/nav_notification"
+                android:icon="@drawable/ic_notification"
+                android:title="Notification"></item>-->
+
+            <item
+                android:id="@+id/nav_settings"
+                android:icon="@drawable/ic_settings"
+                android:title="Settings"></item>
+            </group>
+        </menu>
+    </item>
+
+    </group>
+
+</menu>
