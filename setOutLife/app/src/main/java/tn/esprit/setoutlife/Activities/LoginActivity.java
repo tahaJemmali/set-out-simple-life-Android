@@ -19,17 +19,9 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
-import tn.esprit.setoutlife.Activities.tutorial.welcome;
 import tn.esprit.setoutlife.R;
-import tn.esprit.setoutlife.Retrofit.INodeJsService;
-import tn.esprit.setoutlife.Retrofit.RetrofitClient;
+
 import tn.esprit.setoutlife.entities.User;
-import com.allyants.notifyme.NotifyMe;
 import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.CallbackManager;
@@ -261,18 +253,6 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
             }
         });
 
-/*
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
-        {
-            scrollView.setOnTouchListener( new View.OnTouchListener(){
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    return true;
-                }
-            });
-        } else {
-            scrollView.setOnTouchListener(null);
-        }*/
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
@@ -284,31 +264,9 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
     }
 
     void loginUser(final String email,final String password){
-        try {
-            compositeDisposable.add(iNodeJsService.loginUser(email,password)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<String>() { @Override public void accept(String response) throws Exception {
-                                   Toast.makeText(LoginActivity.this,""+response,Toast.LENGTH_SHORT).show();
-                                   if (response.contains("Login success")){
-                                       Intent intent = new Intent(LoginActivity.this,HomeActivity.class);
-                                       if(DoTutorial){
-                                           intent = new Intent(LoginActivity.this, welcome.class);
-                                       }
-                                       startActivity(intent);
-                                       finish();
-                                   }
-                               } },
-                            new Consumer<Throwable>() { @Override public void accept(Throwable throwable) throws Exception {
-                                System.out.println(throwable.getMessage());
-                            } }));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
 
-            UserRepository.getInstance().login(email,password,this);
-            savePreference();
+        UserRepository.getInstance().login(email,password,this);
+        savePreference();
     }
 
     public void loadPreference(){

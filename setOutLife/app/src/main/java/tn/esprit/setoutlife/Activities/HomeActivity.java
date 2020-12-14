@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -345,16 +344,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         getWindow().setAttributes(attrs);
     }
-
-    public static User getCurrentLoggedInUser(){
-        return CurrentLoggedInUser;
-    }
-
-    public static void setCurrentLoggedInUser (User user){
-        CurrentLoggedInUser=user;
-    }
-
-
 
     public static User getCurrentLoggedInUser(){
         return CurrentLoggedInUser;

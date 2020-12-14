@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,23 +17,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 
 import tn.esprit.setoutlife.Activities.Forum.AddPostActivity;
 import tn.esprit.setoutlife.Activities.Forum.CommentsActivity;
 import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Adapters.PostListAdapter;
-import tn.esprit.setoutlife.Adapters.TaskListAdapter;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Repository.IRepository;
 import tn.esprit.setoutlife.Repository.PostRepository;
 import tn.esprit.setoutlife.Utils.CallBackInterface;
-import tn.esprit.setoutlife.entities.Comment;
 import tn.esprit.setoutlife.entities.Post;
-import tn.esprit.setoutlife.entities.User;
 
 /**
  * A simple {@link Fragment} subclass.
