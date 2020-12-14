@@ -65,27 +65,25 @@
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_email" />
 
-                <EditText
-                    android:id="@+id/edtEmail"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewEmail"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"
-                    android:hint="Email"
-                    android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"
-                    android:visibility="visible" />
-                <!--<ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_email"
-                    android:background="@android:color/transparent"
-                    android:layout_alignParentRight="true"
-                    />-->
+                    android:layout_toRightOf="@+id/imgViewEmail">
+                    <EditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dropDownHeight="match_parent"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"
+                        android:hint="Email"
+                        android:includeFontPadding="false"
+                        android:inputType="textEmailAddress"
+                        android:padding="20dp"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
             </RelativeLayout>
 
             <!--android:textColorHint="@android:color/black"-->
@@ -110,27 +108,33 @@
                     android:layout_height="35dp"
                     android:src="@mipmap/ic_password" />
 
-                <EditText
-                    android:id="@+id/edtPassword"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Password"
-                    android:layout_toRightOf="@+id/imgViewPassword"
-                    android:inputType="textPassword"
-                    android:padding="20dp"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"
-                    android:visibility="visible" />
+                    app:passwordToggleEnabled="true"
+                    android:layout_toRightOf="@+id/imgViewPassword">
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Password"
 
-                <ImageButton
+                        android:inputType="textPassword"
+                        android:padding="20dp"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"
+                        android:visibility="visible" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <!--<ImageButton
                     android:layout_width="35dp"
                     android:layout_height="35dp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:background="@android:color/transparent"
-                    android:src="@mipmap/ic_visible" />
+                    android:src="@mipmap/ic_visible" />-->
             </RelativeLayout>
 
             <View
@@ -173,17 +177,25 @@
                 android:layout_weight="15"
                 android:background="@android:color/transparent" />
 
-            <Button
+
+            <com.kusu.loadingbutton.LoadingButton
                 android:id="@+id/loginBtn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="0"
-                android:background="@drawable/button_login"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:text="Log in"
                 android:textAllCaps="false"
-                android:textColor="@android:color/white"
                 android:textSize="23sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                app:lb_buttonColor="@color/colorPrimary"
+                app:lb_isShadowEnable="true"
+                app:lb_isCircular="true"
+                app:lb_loaderColor="@color/colorAccent"
+                app:lb_shadowColor="@color/colorPrimaryDark"
+                app:lb_shadowHeight="3dp"
+                app:lb_loaderWidth="5dp" />
 
             <View
                 android:layout_width="wrap_content"
@@ -220,64 +232,66 @@
                     />
             </LinearLayout>
 
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="30"
+                android:layout_weight="10"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:weightSum="50">
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="15"
-                    android:background="@android:color/transparent" />
+                <FrameLayout
+                    android:layout_below="@+id/no_network_bar"
+                    android:id="@+id/FrameLayout1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="0"
-                    android:adjustViewBounds="true"
-                    android:background="@android:color/transparent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_facebook" />
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_facebook_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="30dp"
+                        android:layout_marginBottom="30dp"
+                        android:visibility="gone"/>
 
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:background="@android:color/transparent" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <ImageView
+                            android:elevation="10dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_centerVertical="true"
+                            android:id="@+id/fb"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@mipmap/ic_fb"/>
+                        <Button
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:id="@+id/customFacebookBtn"
+                            android:layout_centerVertical="true"
+                            android:background="#3B5998"
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:textAllCaps="false"
+                            android:onClick="onClickFacebookButton"
+                            android:text="            Sign in with Facebook"
+                            android:textAlignment="center"
+                            android:textSize="14sp"
+                            android:textColor="#ffffff" />
+                    </RelativeLayout>
 
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="0"
-                    android:background="@android:color/transparent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_gmail" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="10"
-                    android:background="@android:color/transparent" />
-
-                <ImageButton
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_weight="0"
-                    android:background="@android:color/transparent"
-                    android:scaleType="fitXY"
-                    android:src="@mipmap/ic_hotmail" />
-
-                <View
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="15"
-                    android:background="@android:color/transparent" />
-
+                </FrameLayout>
+                <com.developer.gbuttons.GoogleSignInButton
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:isDarkTheme="true"
+                    android:textAlignment="center"
+                    />
             </LinearLayout>
 
             <View
@@ -303,12 +317,13 @@
                 android:id="@+id/signUpBtn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/container"
+                android:background="@drawable/button2"
                 android:text="Sign up"
                 android:textAllCaps="false"
                 android:textColor="@android:color/black"
                 android:textSize="23sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
         </LinearLayout>
 
     </LinearLayout>

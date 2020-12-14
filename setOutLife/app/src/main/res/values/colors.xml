@@ -5,6 +5,7 @@
     <color name="colorAccent">#121212</color>
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+    <color name="lightGreyPressed">#F9F9F9</color>
     <color name="lightGrey">#E8EBEC</color>
     <color name="darkGrey">#A5A8A9</color>
     <color name="darkGrey2">#8F9191</color>
@@ -22,6 +23,13 @@
     <color name="blue">#0040ff</color>
 
 
+
+
+    <color name="colorPrimaryPressed">#09AA9B</color>
+    <color name="likeColor">#008ad3</color>
+
+    <color name="commentSent">#5EB1DD</color>
+    <color name="commentRecieved">#DFE4E6</color>
 
 
 </resources>

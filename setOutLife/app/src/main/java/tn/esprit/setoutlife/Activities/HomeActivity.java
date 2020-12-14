@@ -1,10 +1,15 @@
 package tn.esprit.setoutlife.Activities;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Base64;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,12 +21,16 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import tn.esprit.setoutlife.Fragments.FinanceFragment;
 import tn.esprit.setoutlife.Fragments.ForumFragment;
 import tn.esprit.setoutlife.Fragments.HomeFragment;
 import tn.esprit.setoutlife.Fragments.ProfilFragment;
 import tn.esprit.setoutlife.Fragments.ScheduleFragment;
+import de.hdodenhof.circleimageview.CircleImageView;
+import tn.esprit.setoutlife.Activities.Profile.ProfileActivity;
+import tn.esprit.setoutlife.Fragments.SettingsFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
 import tn.esprit.setoutlife.R;
 import tn.esprit.setoutlife.Utils.CallBackInterface;
@@ -36,6 +45,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
+
+    CircleImageView profilImageInNavBar;
+    TextView tvNameInNavBar;
+
+    View header;
 
     private static User CurrentLoggedInUser;
     @Override
@@ -73,6 +87,53 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+
+
+
+        /************************** header elements **************************/
+        header = navigationView.getHeaderView(0);
+        tvNameInNavBar = header.findViewById(R.id.tvNameInNavBar);
+        tvNameInNavBar.setText(getCurrentLoggedInUser().getFirstName()+" "+getCurrentLoggedInUser().getLastName());
+        profilImageInNavBar = header.findViewById(R.id.profilImageInNavBar);
+
+        /*if (!HomeActivity.getCurrentLoggedInUser().getPhoto().equals("Not mentioned"))
+            Picasso.get().load(HomeActivity.getCurrentLoggedInUser().getPhoto()).into(profilImageInNavBar);
+        else
+            Picasso.get().load("https://graph.facebook.com/10214899562601635/picture?height=1024").into(profilImageInNavBar);
+*/
+
+
+        if (HomeActivity.getCurrentLoggedInUser().getPhoto().startsWith("/")) {
+            Bitmap bitmap = getBitmapFromString(HomeActivity.getCurrentLoggedInUser().getPhoto());
+            profilImageInNavBar.setImageBitmap(bitmap);
+        }
+        else if (!HomeActivity.getCurrentLoggedInUser().getPhoto().equals("Not mentioned")){
+            Picasso.get().load(HomeActivity.getCurrentLoggedInUser().getPhoto()).into(profilImageInNavBar);
+        }
+        else {
+            Picasso.get().load("https://graph.facebook.com/10214899562601635/picture?height=1024").into(profilImageInNavBar);
+        }
+
+       // System.out.println(HomeActivity.getCurrentLoggedInUser().getPhoto());
+    }
+
+
+
+    private Bitmap getBitmapFromString(String image) {
+
+        byte[] bytes = Base64.decode(image, Base64.DEFAULT);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    @Override
+    protected void onResume() {
+        //toggleFullscreen(false);
+        //System.out.println(fragmentManager.getBackStackEntryCount());
+        tvNameInNavBar.setText(getCurrentLoggedInUser().getFirstName()+" "+getCurrentLoggedInUser().getLastName());
+        if (fragmentManager.getBackStackEntryCount()==0){ //when bach pressed from settings activity
+            drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
+        }
+        super.onResume();
     }
 
     @Override
@@ -93,9 +154,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 fragmentManager.popBackStack();
                 addHomeFragment(null);
                 toggleFullscreen(false);
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
                 break;
             case R.id.nav_Profil:
-                addProfilFragment(null,true);
+                //addProfilFragment(null,true);
+                openProfileActivity();
                 break;
             case R.id.nav_Schedule:
                 addScheduleFragment(null,true);
@@ -107,17 +170,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_Finance:
                 addFinanceFragment(null,true);
                 break;
-            case R.id.nav_ProgressAndStatistics:
-                return false;
+            //case R.id.nav_ProgressAndStatistics:
+              //  return false;
             //break;
             case R.id.nav_Forum:
                 addForumFragment(null,true);
                 break;
             case R.id.nav_settings:
-                return false;
-            //break;
-            case R.id.nav_notification:
-                return false;
+                //addSettingsFragment(null,true);
+                openSettingsActivity();
+            break;
+            //case R.id.nav_notification:
+                //return false;
             //break;
         }
         drawerLayout.closeDrawer(GravityCompat.START);
@@ -127,6 +191,16 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void NavButtonSelected() {
         drawerLayout.openDrawer(GravityCompat.START);
+    }
+
+    private void openSettingsActivity(){
+        Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
+        startActivity(intent);
+    }
+
+    private void openProfileActivity(){
+        Intent intent = new Intent(HomeActivity.this, ProfileActivity.class);
+        startActivity(intent);
     }
 
     private void addHomeFragment(Bundle bundle) {
@@ -172,6 +246,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
+    private void addSettingsFragment(Bundle bundle,Boolean fromNavBar) {
+        fragmentTransaction = fragmentManager.beginTransaction();
+        SettingsFragment settingsFragment = new SettingsFragment();
+        settingsFragment.setCallBackInterface(this);
+        fragmentTransaction.replace(R.id.fragment_container,settingsFragment);
+        if (!fromNavBar) fragmentTransaction.addToBackStack(null);
+        fragmentTransaction.commit();
+    }
+
     private void addTaskFragment(Bundle bundle,Boolean fromNavBar) {
         fragmentTransaction = fragmentManager.beginTransaction();
         TaskFragment taskFragment = new TaskFragment();
@@ -181,7 +264,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.commit();
     }
 
-    @Override
+    /*@Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId()==android.R.id.home)
         {
@@ -189,7 +272,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             Toast.makeText(this, "OnBAckPressed Works", Toast.LENGTH_SHORT).show();
         }
         return super.onOptionsItemSelected(item);
-    }
+    }*/
 
 
 
@@ -206,9 +289,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     @Override
     public void openFragment(String name) {
         switch (name){
-            case "Profil":addProfilFragment(null,false);
-                toggleFullscreen(true);
+            case "Profil":
+                openProfileActivity();
+                //toggleFullscreen(true);
                 navigationView.setCheckedItem(R.id.nav_Profil);
+                /*addProfilFragment(null,false);
+                toggleFullscreen(true);
+                navigationView.setCheckedItem(R.id.nav_Profil);*/
                 break;
             case "Schedule":addScheduleFragment(null,false);
                 toggleFullscreen(true);
@@ -229,7 +316,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 toggleFullscreen(true);
                 navigationView.setCheckedItem(R.id.nav_Forum);
                 break;
-            case "Settings"://TODO addSettingFragment(null);
+            case "Settings"://addSettingsFragment(null,false);
+                openSettingsActivity();
+                //toggleFullscreen(true);
+                navigationView.setCheckedItem(R.id.nav_settings);
                 break;
             case "Tutorial"://TODO addTutorialFragment(null);
                 break;
@@ -256,6 +346,13 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         getWindow().setAttributes(attrs);
     }
 
+    public static User getCurrentLoggedInUser(){
+        return CurrentLoggedInUser;
+    }
+
+    public static void setCurrentLoggedInUser (User user){
+        CurrentLoggedInUser=user;
+    }
 
 
 

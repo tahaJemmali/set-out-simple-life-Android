@@ -64,6 +64,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.ViewHolder> {
     public void setItemCLickListener(OnItemClickListener listener){
         mListener = listener;
     }
+
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView tv;

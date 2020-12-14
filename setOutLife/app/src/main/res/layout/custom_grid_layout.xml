@@ -18,7 +18,7 @@
             android:layout_width="110dp"
             android:layout_height="110dp"
             android:orientation="vertical"
-            android:background="@drawable/container_grid"
+            android:background="@drawable/button_grid_pressed"
             android:gravity="center"
             android:elevation="10dp"
             android:paddingLeft="8dp"

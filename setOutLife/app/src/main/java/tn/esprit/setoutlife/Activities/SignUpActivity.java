@@ -1,11 +1,10 @@
 package tn.esprit.setoutlife.Activities;
 
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.text.TextUtils;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -16,48 +15,60 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-import retrofit2.Retrofit;
+import tn.esprit.setoutlife.Activities.Settings.CustomSettings.CustomSettingsObjectEditText;
+import tn.esprit.setoutlife.Activities.Settings.PersonalInfo.EmailActivity;
+import tn.esprit.setoutlife.Activities.Settings.PersonalInfo.HomeTownActivity;
+import tn.esprit.setoutlife.Activities.Settings.PersonalInfo.NameActivity;
+import tn.esprit.setoutlife.Activities.Settings.PersonalInfo.PhoneActivity;
 import tn.esprit.setoutlife.R;
-import tn.esprit.setoutlife.Retrofit.INodeJsService;
-import tn.esprit.setoutlife.Retrofit.RetrofitClient;
+import tn.esprit.setoutlife.Repository.IRepository;
+import tn.esprit.setoutlife.Repository.UserRepository;
+import tn.esprit.setoutlife.entities.User;
 
-public class SignUpActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity implements IRepository {
 
     ScrollView scrollView;
     Button signUpBtn;
 
     EditText edtFistName,edtLastName,edtEmail,edtPassword,edtConfirmPassword,edtAddress,edtPhone;
-    CompositeDisposable compositeDisposable = new CompositeDisposable();
-    INodeJsService iNodeJsService;
+
+    //CompositeDisposable compositeDisposable = new CompositeDisposable();
+    //INodeJsService iNodeJsService;
 
 
+    Intent intent;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
 
         //Init NodeJs Service
-        Retrofit retrofitClient = RetrofitClient.getInstance();
-        iNodeJsService = retrofitClient.create(INodeJsService.class);
+        //Retrofit retrofitClient = RetrofitClient.getInstance();
+        //iNodeJsService = retrofitClient.create(INodeJsService.class);
 
+        intent = new Intent();
+
+        UserRepository.getInstance().setiRepository(this);
         //InitUI
         initUI();
 
     }
 
     @Override
+    public void onBackPressed() {
+        setResult(0, intent);
+        super.onBackPressed();
+    }
+
+    @Override
     protected void onStop() {
-        compositeDisposable.clear();
+        //compositeDisposable.clear();
         super.onStop();
     }
 
     @Override
     protected void onDestroy() {
-        compositeDisposable.clear();
+        //compositeDisposable.clear();
         super.onDestroy();
     }
 
@@ -72,6 +83,7 @@ public class SignUpActivity extends AppCompatActivity {
         edtConfirmPassword  = findViewById(R.id.edtConfirmPassword);
         edtAddress  = findViewById(R.id.edtAddress);
         edtPhone  = findViewById(R.id.edtPhone);
+        edtPhone.setInputType(InputType.TYPE_CLASS_NUMBER);
 
 
         signUpBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
 
 
 
-        if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
+        /*if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
         {
             scrollView.setOnTouchListener( new View.OnTouchListener(){
                 @Override
@@ -99,7 +111,8 @@ public class SignUpActivity extends AppCompatActivity {
             });
         } else {
             scrollView.setOnTouchListener(null);
-        }
+        }*/
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             Window w = getWindow();
             //w.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
@@ -108,6 +121,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     void registerUser(String firstName,String lastName,String email,String password,String confirmPassword,String address,String phone){
+        String namePattern = "^[\\p{L} .'-]+$";
+
         if (TextUtils.isEmpty(firstName))
         {
             Toast.makeText(SignUpActivity.this,"First name cannot be empty!",Toast.LENGTH_LONG).show();
@@ -120,9 +135,28 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        if (!firstName.matches(namePattern))
+        {
+            Toast.makeText(SignUpActivity.this,"Invalid last name!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (!lastName.matches(namePattern))
+        {
+            Toast.makeText(SignUpActivity.this,"Invalid last name!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (TextUtils.isEmpty(email))
         {
             Toast.makeText(SignUpActivity.this,"Email cannot be empty!",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        if (!CustomSettingsObjectEditText.emailText.matches(emailPattern))
+        {
+            Toast.makeText(SignUpActivity.this,"Invalid email address!",Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -138,29 +172,43 @@ public class SignUpActivity extends AppCompatActivity {
             return;
         }
 
+        if (TextUtils.isEmpty(address)){
+            address="Not mentioned";
+        } else if (!address.matches(namePattern))
+        {
+            Toast.makeText(SignUpActivity.this,"Invalid home town!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (TextUtils.isEmpty(phone)){
+            phone="Not mentioned";
+        }else if (phone.length()<8)
+        {
+            Toast.makeText(SignUpActivity.this,"Invalid phone number!",Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        User user = new User();
+        user.setFirstName(firstName);
+        user.setLastName(lastName);
+        user.setEmail(email);
+        user.setAddress(address);
+        user.setPhone(phone);
+        user.setPassword(password);
 
         //register
-        try {
-            compositeDisposable.add(iNodeJsService.registerUser(firstName,lastName,email,password,address,phone)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Consumer<String>() { @Override public void accept(String response) throws Exception {
-                                   Toast.makeText(SignUpActivity.this,""+response,Toast.LENGTH_SHORT).show();
-                                   if (!response.contains("Email already exists") && !response.contains("Phone number already exists")) {
-                                       Intent intent = new Intent();
-                                       setResult(RESULT_OK, intent);
-                                       finish();
-                                   }
-                    } },
-                            new Consumer<Throwable>() { @Override public void accept(Throwable throwable) throws Exception {
-                                System.out.println(throwable.getMessage());
-                            } }));
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-
+        UserRepository.getInstance().register(user,this);
 
     }
 
+    @Override
+    public void showLoadingButton() {
+
+    }
+
+    @Override
+    public void doAction() {
+        setResult(RESULT_OK,intent);
+        finish();
+    }
 }

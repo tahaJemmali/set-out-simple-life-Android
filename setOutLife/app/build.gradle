@@ -28,6 +28,7 @@ dependencies {
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
     implementation 'com.google.android.material:material:1.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.coordinatorlayout:coordinatorlayout:1.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
@@ -62,4 +63,43 @@ dependencies {
 
     //Multiple selection spinner
     implementation 'com.github.Liocoder24x7:Advanced-Spinner:v1.0'
+
+    //google button
+    implementation 'com.github.TutorialsAndroid:GButton:v1.0.19'
+
+    implementation 'com.github.koushikcse:LoadingButton:1.7'
+
+    //facebook
+    implementation 'com.facebook.android:facebook-android-sdk:5.15.3'
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //settings
+    implementation 'com.github.filol:material-preference-library:1.0'
+    implementation "com.mikepenz:iconics-core:2.9.5@aar"
+    implementation 'com.mikepenz:community-material-typeface:2.0.46.1@aar'
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+
+    //v2 settings
+    implementation 'com.github.or-dvir.EasySettings:easysettings-basic:1.1.4'
+    implementation 'com.github.or-dvir.EasySettings:easysettings-dialogs:1.1.4'
+
+    //profile
+    //implementation 'com.jakewharton:butterknife:7.0.1'
+
+    //like btn
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+
+    //http3
+    implementation 'com.squareup.okhttp3:okhttp:3.12.3';
+
+    //notification
+    implementation 'com.github.jakebonk:NotifyMe:1.0.1'
+
+    //code verif
+    implementation "com.github.fraggjkee:sms-confirmation-view:1.1"
+
+
+
 }

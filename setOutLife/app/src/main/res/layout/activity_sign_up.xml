@@ -4,8 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/scrollView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:scrollbars="none"
+    android:fitsSystemWindows="true"
     tools:context=".Activities.LoginActivity">
 
     <LinearLayout
@@ -37,13 +38,13 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:background="@android:color/transparent" />
 
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
-            android:layout_height="320dp"
+            android:layout_height="330dp"
             android:layout_weight="10"
             android:background="@drawable/container"
             android:orientation="vertical"
@@ -63,28 +64,32 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_user" />
+                <!--
+<com.google.android.material.textfield.TextInputLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/edtFistName"
+</com.google.android.material.textfield.TextInputLayout>
+-->
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewFirstName"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="First Name"
-                    android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"/>
-                <!--<ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_email"
-                    android:background="@android:color/transparent"
-                    android:layout_alignParentRight="true"
-                    />-->
+                    android:layout_toRightOf="@+id/imgViewFirstName">
+                    <EditText
+                        android:id="@+id/edtFistName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="First Name"
+                        android:includeFontPadding="false"
+                        android:inputType="textEmailAddress"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -101,27 +106,28 @@
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_user" />
 
-                <EditText
-                    android:id="@+id/edtLastName"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewLastName"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Last Name"
-                    android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"/>
-                <!--<ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@mipmap/ic_email"
-                    android:background="@android:color/transparent"
-                    android:layout_alignParentRight="true"
-                    />-->
+                    android:layout_toRightOf="@+id/imgViewLastName">
+                    <EditText
+                        android:id="@+id/edtLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Last Name"
+                        android:includeFontPadding="false"
+                        android:inputType="textEmailAddress"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
             </RelativeLayout>
 
             <RelativeLayout
@@ -138,20 +144,26 @@
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_email" />
 
-                <EditText
-                    android:id="@+id/edtEmail"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewEmail"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Email"
-                    android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"/>
+                    android:layout_toRightOf="@+id/imgViewEmail">
+                    <EditText
+                        android:id="@+id/edtEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Email"
+                        android:includeFontPadding="false"
+                        android:inputType="textEmailAddress"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <!--<ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -182,28 +194,25 @@
                     android:layout_height="35dp"
                     android:src="@mipmap/ic_password" />
 
-                <EditText
-                    android:id="@+id/edtPassword"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Password"
                     android:layout_toRightOf="@+id/imgViewPassword"
-                    android:inputType="textPassword"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"/>
+                    app:passwordToggleEnabled="true">
+                    <EditText
+                        android:id="@+id/edtPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/ic_visible"
-                    />
             </RelativeLayout>
 
             <RelativeLayout
@@ -220,27 +229,25 @@
                     android:layout_height="35dp"
                     android:src="@mipmap/ic_password" />
 
-                <EditText
-                    android:id="@+id/edtConfirmPassword"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Confirm Password"
                     android:layout_toRightOf="@+id/imgViewConfirmPassword"
-                    android:inputType="textPassword"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsbold"/>
+                    app:passwordToggleEnabled="true">
+                    <EditText
+                        android:id="@+id/edtConfirmPassword"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Confirm Password"
+                        android:inputType="textPassword"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsbold"/>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <ImageButton
-                    android:layout_width="35dp"
-                    android:layout_height="35dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:background="@android:color/transparent"
-                    android:src="@mipmap/ic_visible" />
             </RelativeLayout>
 
         </LinearLayout>
@@ -248,7 +255,7 @@
         <View
             android:layout_width="wrap_content"
             android:layout_height="0dp"
-            android:layout_weight="10"
+            android:layout_weight="5"
             android:background="@android:color/transparent" />
 
         <LinearLayout
@@ -258,7 +265,7 @@
             android:layout_weight="10"
             android:background="@drawable/container"
             android:orientation="vertical"
-            android:padding="15dp"
+            android:padding="5dp"
             android:weightSum="100">
 
             <RelativeLayout
@@ -274,21 +281,25 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_address" />
-
-                <EditText
-                    android:id="@+id/edtAddress"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewAddress"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:hint="Address  (optional)"
-                    android:includeFontPadding="false"
-                    android:inputType="textEmailAddress"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsregular"/>
+                    android:layout_toRightOf="@+id/imgViewAddress">
+                    <EditText
+                        android:id="@+id/edtAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:hint="Address  (optional)"
+                        android:includeFontPadding="false"
+                        android:inputType="textEmailAddress"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsregular"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -311,22 +322,26 @@
                     android:layout_height="35dp"
                     android:layout_centerVertical="true"
                     android:src="@mipmap/ic_phone" />
-
-                <EditText
-                    android:id="@+id/edtPhone"
+                <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/imgViewPhone"
-                    android:completionHint="yourhint"
-                    android:dropDownHeight="match_parent"
-                    android:textSize="15dp"
-                    android:fontFamily="@font/poppinsregular"
-                    android:hint="Phone  (optional)"
-                    android:includeFontPadding="false"
-                    android:inputType="phone"
-                    android:padding="20dp"
-                    android:visibility="visible"
-                    />
+                    android:layout_toRightOf="@+id/imgViewPhone">
+                    <EditText
+                        android:id="@+id/edtPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:completionHint="yourhint"
+                        android:dropDownHeight="match_parent"
+                        android:textSize="15dp"
+                        android:fontFamily="@font/poppinsregular"
+                        android:hint="Phone  (optional)"
+                        android:includeFontPadding="false"
+                        android:inputType="phone"
+                        android:padding="15dp"
+                        android:visibility="visible"
+                        />
+                </com.google.android.material.textfield.TextInputLayout>
+
                 <ImageButton
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
