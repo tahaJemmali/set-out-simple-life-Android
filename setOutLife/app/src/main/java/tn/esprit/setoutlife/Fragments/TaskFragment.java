@@ -166,7 +166,7 @@ public class TaskFragment extends Fragment {
 if(global != null){
     for (Project row:global){
         int diff= row.getDateCreated().getDay()- new Date().getDay();
-        Log.e("TAG", "selected date: "+diff);
+
 
         if (diff==0)
           projects.add(row);
@@ -238,12 +238,12 @@ if(global != null){
                     ArrayList projects = new ArrayList<Project>();
                     for (Project row : global) {
                        int diff= row.getDateCreated().getDay()- date.getTime().getDay();
-                        Log.e("TAG", "selected date: "+diff);
+
 
                         if (diff==0)
                             projects.add(row);
                     }
-                    Log.e("TAG", "projects: "+projects );
+                  
                     projectListAdapter = new ProjectListAdapter(mContext, projects);
                     rv.setAdapter(projectListAdapter);
                 }
