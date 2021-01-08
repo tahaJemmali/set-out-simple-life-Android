@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Enums.BalanceEnum;
 import tn.esprit.setoutlife.Fragments.FinanceFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
@@ -42,6 +43,7 @@ public class BalanceRepository {
             object.put("balanceAmount",balance.getAmount());
             object.put("dateCreation",balance.getDateCreated());
             object.put("type",balance.getType());
+            object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -91,7 +93,7 @@ public class BalanceRepository {
     }
 
     private static void getAllBalance(Context mcontext,final ProgressDialog dialog,final FragmentManager fragmentManager) {
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_balances", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_balances/" + HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -130,14 +132,14 @@ public class BalanceRepository {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_balances");
+                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_balances/"+ HomeActivity.getCurrentLoggedInUser().getId());
             }
         });
         VolleyInstance.getInstance(mcontext).addToRequestQueue(request);
 
     }
     public static void getAllBalance(Context mcontext) {
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_balances", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_balances/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

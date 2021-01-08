@@ -120,7 +120,7 @@ public class ProjectFragment extends Fragment {
                                     final ProgressDialog dialogg = ProgressDialog.show(mContext
                                             , "","Loading..Wait.." , true);
                                     dialogg.show();
-                                ProjectRepository.deleteProject(mContext,id,dialogg,fragmentManager);
+                                ProjectRepository.deleteProject(mContext,id,dialogg,fragmentManager,tasks);
                                 Toast.makeText(mContext, "Project Deleted Successfully!", Toast.LENGTH_LONG).show();
 
                             }

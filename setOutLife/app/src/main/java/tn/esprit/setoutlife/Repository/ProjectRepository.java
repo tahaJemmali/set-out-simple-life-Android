@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Fragments.ProjectFragment;
 import tn.esprit.setoutlife.Fragments.ScheduleFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
@@ -53,6 +54,7 @@ private static ArrayList<Project> projects;
                 object1.put("reminder",row.getReminder());
                 object1.put("schedule",false);
                 jsonArray.put(object1);
+                TaskRepository.updateTask(mContext,object1,row.getId());
             }
             JSONObject object1 = new JSONObject();
 
@@ -61,6 +63,7 @@ private static ArrayList<Project> projects;
             object1.put("color",project.getTag().getColor());
             object.put("tasks",jsonArray);
             object.put("tag",object1);
+            object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -86,7 +89,7 @@ private static ArrayList<Project> projects;
     }
     public static void getAllProject(Context mContext){
 
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_projects", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_projects/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -103,10 +106,17 @@ private static ArrayList<Project> projects;
                                     JSONObject jsonTask = jsonTasks.getJSONObject(j);
                                     String d = jsonTask.getString("dateCreation");
                                     Date dateCreation = sdf.parse(d);
-                                    String d1 = jsonTask.getString("deadline");
-                                    Date deadline = sdf.parse(d1);
-                                    String d2 = jsonTask.getString("reminder");
-                                    Date reminder = sdf.parse(d2);
+
+                                    String dateStr2="";
+                                    String dateStr3="";
+                                    Date deadline =new Date();
+                                    Date reminder =new Date();
+                                    if( jsonTask.has("deadline") &&jsonTask.has("reminder")){
+                                        dateStr2 = jsonTask.getString("deadline");
+                                        dateStr3 = jsonTask.getString("reminder");
+                                        deadline = sdf.parse(dateStr2);
+                                        reminder = sdf.parse(dateStr3);
+                                    }
                                     Task task=new Task(jsonTask.getString("_id"),
                                             jsonTask.getString("taskName"),
                                             dateCreation,
@@ -142,14 +152,14 @@ private static ArrayList<Project> projects;
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_projects");
+                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_projects/"+ HomeActivity.getCurrentLoggedInUser().getId());
             }
         });
         VolleyInstance.getInstance(mContext).addToRequestQueue(request);
     }
     public static void getAllProject(final Context mContext, final ProgressDialog dialogg, final FragmentManager fragmentManager){
 
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_projects", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_projects/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -166,10 +176,16 @@ private static ArrayList<Project> projects;
                                     JSONObject jsonTask = jsonTasks.getJSONObject(j);
                                     String d = jsonTask.getString("dateCreation");
                                     Date dateCreation = sdf.parse(d);
-                                    String d1 = jsonTask.getString("deadline");
-                                    Date deadline = sdf.parse(d1);
-                                    String d2 = jsonTask.getString("reminder");
-                                    Date reminder = sdf.parse(d2);
+                                    String dateStr2="";
+                                    String dateStr3="";
+                                    Date deadline =new Date();
+                                    Date reminder =new Date();
+                                    if( jsonTask.has("deadline") &&jsonTask.has("reminder")){
+                                        dateStr2 = jsonTask.getString("deadline");
+                                        dateStr3 = jsonTask.getString("reminder");
+                                        deadline = sdf.parse(dateStr2);
+                                        reminder = sdf.parse(dateStr3);
+                                    }
                                     Task task=new Task(jsonTask.getString("_id"),
                                             jsonTask.getString("taskName"),
                                             dateCreation,
@@ -216,8 +232,13 @@ private static ArrayList<Project> projects;
         });
         VolleyInstance.getInstance(mContext).addToRequestQueue(request);
     }
-    public static void deleteProject(final Context mcontext, String id, final ProgressDialog dialogg, final FragmentManager fragmentManager){
+    public static void deleteProject(final Context mcontext, String id, final ProgressDialog dialogg, final FragmentManager fragmentManager, ArrayList<Task> tasks){
         final String url=RetrofitClient.url + "/delete_project/"+id;
+        if (tasks!=null){
+            for (Task row:tasks){
+                TaskRepository.deleteTask(mcontext,row);
+            }
+        }
         JsonObjectRequest request = new  JsonObjectRequest(Request.Method.DELETE, url, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
