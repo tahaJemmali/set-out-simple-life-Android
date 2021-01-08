@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -57,7 +59,7 @@ public class TaskFragment extends Fragment {
     FragmentManager fragmentManager;
     TextView tvCurrentSelectedDate;
     TextView tvCurrentSelectedMonth;
-
+    static Date selectedDate;
     //ScrollView
     ScrollView scrollViewTaskFragment;
 
@@ -104,10 +106,10 @@ public class TaskFragment extends Fragment {
         requireActivity().getOnBackPressedDispatcher().addCallback(this, callback);
 
         initUI();
-        initUICalendar();
         initUIRecycleViewerTasks();
         addTask();
         addTag();
+        initUICalendar();
         showProject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -155,21 +157,23 @@ public class TaskFragment extends Fragment {
         addTask = view.findViewById(R.id.addTask);
         showProject = view.findViewById(R.id.showProject);
         addTag = view.findViewById(R.id.addTag);
+        rv = view.findViewById(R.id.rv);
     }
 
     private void initUIRecycleViewerTasks() {
-        rv = view.findViewById(R.id.rv);
 
         ArrayList projects = new ArrayList<Project>();
 if(global != null){
     for (Project row:global){
-        projects.add(row);
+        int diff= row.getDateCreated().getDay()- new Date().getDay();
+        Log.e("TAG", "selected date: "+diff);
+
+        if (diff==0)
+          projects.add(row);
     }
 }
-
-
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-        projectListAdapter = new ProjectListAdapter(mContext, projects);
+         projectListAdapter = new ProjectListAdapter(mContext, projects);
         rv.setAdapter(projectListAdapter);
     }
 
@@ -209,10 +213,17 @@ if(global != null){
                     public List<CalendarEvent> events(Calendar date) {
                         List<CalendarEvent> events = new ArrayList<>();
                         int count = rnd.nextInt(6);
-
-                        for (int i = 0; i <= count; i++) {
-                            events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
-                        }
+                        if (global!=null){
+                            ArrayList projects = new ArrayList<Project>();
+                                for (Project row : global) {
+                                    if (row.getDateCreated().equals(date))
+                                        projects.add(row);
+                                }
+                                count = projects.size();
+                            }
+                            for (int i = 0; i <= count; i++) {
+                                events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
+                            }
 
                         return events;
                     }
@@ -222,6 +233,22 @@ if(global != null){
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Calendar date, int position) {
+                if (global!=null){
+
+                    ArrayList projects = new ArrayList<Project>();
+                    for (Project row : global) {
+                       int diff= row.getDateCreated().getDay()- date.getTime().getDay();
+                        Log.e("TAG", "selected date: "+diff);
+
+                        if (diff==0)
+                            projects.add(row);
+                    }
+                    Log.e("TAG", "projects: "+projects );
+                    projectListAdapter = new ProjectListAdapter(mContext, projects);
+                    rv.setAdapter(projectListAdapter);
+                }
+
+                selectedDate=date.getTime();
                 tvCurrentSelectedDate.setText(DateFormat.format("EEEE,  MMMM  d,  yyyy", date));
                 tvCurrentSelectedMonth.setText(DateFormat.format("MMMM", date));
             }
