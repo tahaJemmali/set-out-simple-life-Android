@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Fragments.AddProjectFragment;
 import tn.esprit.setoutlife.Fragments.AddTaskFragment;
 import tn.esprit.setoutlife.Fragments.TaskFragment;
@@ -34,6 +35,7 @@ public class TagRepository   {
             //input your API parameters
             object.put("tagName",tag.getName());
             object.put("color",tag.getColor());
+            object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -60,7 +62,7 @@ public class TagRepository   {
     }
      private static void getAllTags(Context mContext, final ProgressDialog dialogg, final FragmentManager fragmentManager) {
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tags", null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tags/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -97,7 +99,7 @@ public class TagRepository   {
     }
     static public void getAllTags(Context mContext) {
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tags", null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tags/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {

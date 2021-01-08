@@ -76,7 +76,8 @@ public class TaskRepository {
             object.put("deadline",task.getDeadline());
             object.put("reminder",task.getReminder());
             object.put("endTime",task.getEndTime());
-            object.put("schedule",true);
+            object.put("schedule",false);
+            object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -84,7 +85,7 @@ public class TaskRepository {
     }
      public static void  getAllScheudles(Context mContext){
 
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_schedules", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_schedules/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -128,7 +129,7 @@ public class TaskRepository {
     }
     public static void  getAllTasks(Context mContext){
         System.out.println("Current user : " + HomeActivity.getCurrentLoggedInUser().getId());
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tasks", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_tasks/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -141,25 +142,34 @@ public class TaskRepository {
                                 String dateStr = jsonTag.getString("dateCreation");
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                                 Date dateCreation = sdf.parse(dateStr);
-                                String dateStr2 = jsonTag.getString("deadline");
-                                Date deadline = sdf.parse(dateStr2);
-                                String dateStr3 = jsonTag.getString("reminder");
-                                Date reminder = sdf.parse(dateStr3);
-                                Task t=new Task(jsonTag.getString("_id"),
-                                        jsonTag.getString("taskName"),
-                                        dateCreation,
-                                        deadline,
-                                        reminder,
-                                        jsonTag.getInt("importance"),
-                                        jsonTag.getInt("enjoyment"),
-                                        jsonTag.getString("note"),
-                                        false);
-                                tasks.add(t);
+                               String dateStr2="";
+                               String dateStr3="";
+                               Date deadline =new Date();
+                               Date reminder =new Date();
+                               if( jsonTag.has("deadline") &&jsonTag.has("reminder")){
+                                    dateStr2 = jsonTag.getString("deadline");
+                                    dateStr3 = jsonTag.getString("reminder");
+                                    deadline = sdf.parse(dateStr2);
+                                    reminder = sdf.parse(dateStr3);
+                               }
+                                if (jsonTag.getBoolean("schedule") == true){
+                                    Task t=new Task(jsonTag.getString("_id"),
+                                            jsonTag.getString("taskName"),
+                                            dateCreation,
+                                            deadline,
+                                            reminder,
+                                            jsonTag.getInt("importance"),
+                                            jsonTag.getInt("enjoyment"),
+                                            jsonTag.getString("note"),
+                                            true);
+                                    tasks.add(t);
+                                }
                             }
                         } catch (JSONException | ParseException e) {
                             e.printStackTrace();
 
                         }finally {
+                            Log.e("TAG", "globalTasks: "+tasks );
                             AddProjectFragment.globalTasks=tasks;
                         }
                     }
@@ -167,7 +177,7 @@ public class TaskRepository {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
-                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_tasks");
+                Log.e("TAG", "onResponse: "+RetrofitClient.url + "/all_tasks/"+ HomeActivity.getCurrentLoggedInUser().getId());
             }
         });
         VolleyInstance.getInstance(mContext).addToRequestQueue(request);
@@ -212,7 +222,7 @@ public class TaskRepository {
 
     ///WAITING
     public static void  getAllTasks(Context mContext, final ProgressDialog dialogg, final FragmentManager fragmentManager){
-        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_schedules", null,
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_schedules/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -272,6 +282,7 @@ public class TaskRepository {
             object.put("dateCreation",task.getDateCreation());
             object.put("endTime",task.getEndTime());
             object.put("schedule",true);
+            object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -303,6 +314,27 @@ public class TaskRepository {
                 try {
                     Log.e("TAG", "done: "+response.getString("message"));
                     getAllTasks(mcontext,dialogg,fragmentManager);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+                Log.e("TAG", "onResponse: "+url);
+            }
+        });
+        VolleyInstance.getInstance(mcontext).addToRequestQueue(request);
+    }
+
+    public static void updateTask(final Context mcontext,JSONObject obj,String id){
+        final String url=RetrofitClient.url + "/update_task/"+id;
+        JsonObjectRequest request = new  JsonObjectRequest(Request.Method.PUT, url, obj, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    Log.e("TAG", "done: "+response.getString("message"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
