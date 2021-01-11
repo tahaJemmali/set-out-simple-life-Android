@@ -76,4 +76,9 @@ public class ResetPasswordActivity extends AppCompatActivity implements IReposit
         startActivity(intent);
         finish();
     }
+
+    @Override
+    public void doAction2() {
+        //
+    }
 }

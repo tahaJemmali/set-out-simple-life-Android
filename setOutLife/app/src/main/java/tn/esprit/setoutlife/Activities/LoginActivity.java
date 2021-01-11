@@ -1,5 +1,6 @@
 package tn.esprit.setoutlife.Activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.icu.text.SimpleDateFormat;
@@ -62,6 +63,8 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
     CheckBox cbRememberMe;
     TextView forgetPasswordBtn;
 
+    ProgressDialog pb;
+    ProgressDialog pb2;
 
     String email ;
     String password;
@@ -91,8 +94,12 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        pb = new ProgressDialog(this);
+        pb2 = new ProgressDialog(this);
 
         if (isLoggedIn()){
+            pb2.setMessage("Logging in...");
+            pb2.show();
             GraphRequest graphRequest = GraphRequest.newMeRequest(AccessToken.getCurrentAccessToken(),
                     new GraphRequest.GraphJSONObjectCallback(){
                         @Override
@@ -230,7 +237,6 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
                 if (!edtEmail.getText().toString().equals("") && !edtPassword.getText().toString().equals("")){
                         loginUser(edtEmail.getText().toString(),edtPassword.getText().toString());
                 }else{
-
                     Toast.makeText(LoginActivity.this,"Invalid Email or Password",Toast.LENGTH_LONG).show();
                 }
             }
@@ -266,6 +272,8 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
     void loginUser(final String email,final String password){
 
         UserRepository.getInstance().login(email,password,this);
+        pb.setMessage("Logging in...");
+        pb.show();
         savePreference();
     }
 
@@ -337,8 +345,8 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
                         User user = new User();
                         user.setLastName(object.getString("last_name"));
                         user.setFirstName(object.getString("first_name"));
-                        //user.setEmail(object.getString("email"));
-                        user.setEmail("tahajammali@esprit.tn");
+                        user.setEmail(object.getString("email"));
+                       // user.setEmail("tahajammali@esprit.tn");
                         String id = object.getString("id");
                         user.setSigned_up_with("Facebook");
                         //System.out.println(object.getString("birthday"));
@@ -437,7 +445,7 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
 
     @Override
     public void showLoadingButton() {
-        loginBtn.showLoading();
+        pb.dismiss();
     }
 
     @Override
@@ -448,6 +456,11 @@ public class LoginActivity extends AppCompatActivity implements IRepository {
        }
        startActivity(intent);
        finish();
+    }
+
+    @Override
+    public void doAction2() {
+        pb2.dismiss();
     }
 
 }

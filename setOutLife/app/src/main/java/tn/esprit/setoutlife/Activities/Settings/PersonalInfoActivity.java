@@ -267,8 +267,10 @@ public class PersonalInfoActivity extends AppCompatActivity implements CallBackS
         Intent intent;
         switch (key){
             case SETTINGS_KEY_EMAIL:
-                 intent = new Intent(PersonalInfoActivity.this,EmailActivity.class);
-                startActivityForResult(intent,REQUEST_CODE_UPDATE_EMAIL);
+                if (HomeActivity.getCurrentLoggedInUser().getSigned_up_with().equals("Set Out - Life account")){
+                    intent = new Intent(PersonalInfoActivity.this,EmailActivity.class);
+                    startActivityForResult(intent,REQUEST_CODE_UPDATE_EMAIL);
+                }
                 break;
             case SETTINGS_KEY_NAME:
                  intent = new Intent(PersonalInfoActivity.this, NameActivity.class);

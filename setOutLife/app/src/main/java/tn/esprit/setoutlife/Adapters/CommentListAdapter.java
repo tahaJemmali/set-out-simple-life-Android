@@ -131,7 +131,8 @@ public class CommentListAdapter extends RecyclerView.Adapter {
 
                     if (message.getString("user_photo").startsWith("/")) {
                         Bitmap bitmap = getBitmapFromString(message.getString("user_photo"));
-                        messageHolder.imgViewProfile.setImageBitmap(bitmap);
+                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.2), (int)(bitmap.getHeight()*0.2), true);
+                        messageHolder.imgViewProfile.setImageBitmap(resized);
                     }
                     else if (!message.getString("user_photo").equals("Not mentioned")){
                         Picasso.get().load(message.getString("user_photo")).into(messageHolder.imgViewProfile);
@@ -185,7 +186,8 @@ public class CommentListAdapter extends RecyclerView.Adapter {
 
                     if (message.getString("user_photo").startsWith("/")) {
                         Bitmap bitmap = getBitmapFromString(message.getString("user_photo"));
-                        messageHolder.imgViewProfile.setImageBitmap(bitmap);
+                        Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.2), (int)(bitmap.getHeight()*0.2), true);
+                        messageHolder.imgViewProfile.setImageBitmap(resized);
                     }
                     else if (!message.getString("user_photo").equals("Not mentioned")){
                         Picasso.get().load(message.getString("user_photo")).into(messageHolder.imgViewProfile);

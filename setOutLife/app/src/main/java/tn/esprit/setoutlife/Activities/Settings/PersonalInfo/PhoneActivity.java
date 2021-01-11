@@ -85,7 +85,7 @@ public class PhoneActivity extends AppCompatActivity implements IRepository {
         }
 
         //String namePattern = "^[a-zA-Z]*$";
-        if (CustomSettingsObjectEditText.phoneText.length()<8)
+        if (CustomSettingsObjectEditText.phoneText.length()!=8)
         {
             Toast.makeText(PhoneActivity.this,"Invalid phone number!",Toast.LENGTH_SHORT).show();
             return;
@@ -123,6 +123,11 @@ public class PhoneActivity extends AppCompatActivity implements IRepository {
         intent.putExtra("new_last_name",CustomSettingsObjectEditText.lastNameText);
         setResult(RESULT_OK, intent);
         finish();*/
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 
 }

@@ -30,6 +30,7 @@ import java.util.Date;
 import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.Adapters.ProfileListAdapter;
 import tn.esprit.setoutlife.R;
+import tn.esprit.setoutlife.Utils.CallBackInterface;
 
 public class ProfileActivity extends AppCompatActivity implements AppBarLayout.OnOffsetChangedListener {
 
@@ -54,11 +55,17 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
     ArrayList<String> titles;
     ArrayList<String> descriptions;
 
+    CallBackInterface callBackInterface;
+
+    public void setCallBackInterface (CallBackInterface callBackInterface){
+        this.callBackInterface = callBackInterface;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
+        setCallBackInterface(HomeActivity.myContext);
 
         toolbar = findViewById(R.id.toolbar);
         toolbarHeaderView = findViewById(R.id.toolbar_header_view);
@@ -119,6 +126,11 @@ public class ProfileActivity extends AppCompatActivity implements AppBarLayout.O
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        callBackInterface.popBackb();
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

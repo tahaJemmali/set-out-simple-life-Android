@@ -4,8 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragments.ForumFragment"
-    >
+    tools:context=".Fragments.ForumFragment">
 
     <include
         android:layout_width="match_parent"
@@ -43,8 +42,8 @@
             android:layout_gravity="bottom|end"
             android:layout_marginRight="16sp"
             android:layout_marginBottom="50sp"
-            app:srcCompat="@android:drawable/ic_input_add"
-            android:backgroundTint="@color/colorPrimaryDark"/>
+            app:srcCompat="@drawable/ic_addd"
+            android:backgroundTint="@color/dark_blue"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

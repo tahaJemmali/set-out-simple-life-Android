@@ -163,17 +163,17 @@ public class TaskFragment extends Fragment {
     private void initUIRecycleViewerTasks() {
 
         ArrayList projects = new ArrayList<Project>();
-if(global != null){
-    for (Project row:global){
-        int diff= row.getDateCreated().getDay()- new Date().getDay();
+        if(global != null){
+            for (Project row:global){
+                int diff= row.getDateCreated().getDay()- new Date().getDay();
 
 
-        if (diff==0)
-          projects.add(row);
-    }
-}
+                if (diff==0)
+                    projects.add(row);
+            }
+        }
         rv.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
-         projectListAdapter = new ProjectListAdapter(mContext, projects);
+        projectListAdapter = new ProjectListAdapter(mContext, projects);
         rv.setAdapter(projectListAdapter);
     }
 
@@ -212,18 +212,20 @@ if(global != null){
                     @Override
                     public List<CalendarEvent> events(Calendar date) {
                         List<CalendarEvent> events = new ArrayList<>();
-                        int count = rnd.nextInt(6);
+                        int count = 0;
                         if (global!=null){
                             ArrayList projects = new ArrayList<Project>();
-                                for (Project row : global) {
-                                    if (row.getDateCreated().equals(date))
-                                        projects.add(row);
-                                }
-                                count = projects.size();
+                            for (Project row : global) {
+                                if (row.getDateCreated().getDay()== date.getTime().getDay())
+                                    projects.add(row);
                             }
-                            for (int i = 0; i <= count; i++) {
-                                events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
+                            count = projects.size();
+                            for (int i = 0; i < count; i++) {
+                                Project p = (Project) projects.get(i);
+                                events.add(new CalendarEvent(Color.parseColor(p.getTag().getColor()), "event"));
                             }
+                        }
+
 
                         return events;
                     }
@@ -237,13 +239,12 @@ if(global != null){
 
                     ArrayList projects = new ArrayList<Project>();
                     for (Project row : global) {
-                       int diff= row.getDateCreated().getDay()- date.getTime().getDay();
-
+                        int diff= row.getDateCreated().getDay()- date.getTime().getDay();
 
                         if (diff==0)
                             projects.add(row);
                     }
-                  
+
                     projectListAdapter = new ProjectListAdapter(mContext, projects);
                     rv.setAdapter(projectListAdapter);
                 }

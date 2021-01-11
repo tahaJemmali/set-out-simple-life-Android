@@ -1,5 +1,6 @@
 package tn.esprit.setoutlife.Fragments;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -43,7 +44,7 @@ public class ForumFragment extends Fragment implements IRepository {
 
     ArrayList<Post> posts;
 
-
+    ProgressDialog pb;
     PostListAdapter postListAdapter;
     RecyclerView rvPosts;
 
@@ -79,9 +80,12 @@ public class ForumFragment extends Fragment implements IRepository {
         view = inflater.inflate(R.layout.fragment_forum, container, false);
 
         mContext = getContext();
+        pb = new ProgressDialog(mContext);
         rvPosts = view.findViewById(R.id.rvPosts);
 
         posts = PostRepository.getInstance().getPosts(mContext);
+        pb.setMessage("Loading... Please wait");
+        pb.show();
         postListAdapter = new PostListAdapter(mContext,posts);
         rvPosts.setAdapter(postListAdapter);
         rvPosts.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
@@ -190,5 +194,11 @@ public class ForumFragment extends Fragment implements IRepository {
     @Override
     public void doAction() {
         postListAdapter.notifyDataSetChanged();
+        pb.dismiss();
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 }

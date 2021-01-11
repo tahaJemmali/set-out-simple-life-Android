@@ -107,7 +107,8 @@ public class PostListAdapter extends RecyclerView.Adapter<PostListAdapter.PostHo
 
         if (post.getUser().getPhoto().startsWith("/")) {
             Bitmap bitmap = getBitmapFromString(post.getUser().getPhoto());
-            holder.imgViewProfile.setImageBitmap(bitmap);
+            Bitmap resized = Bitmap.createScaledBitmap(bitmap, (int)(bitmap.getWidth()*0.1), (int)(bitmap.getHeight()*0.1), true);
+            holder.imgViewProfile.setImageBitmap(resized);
         }
         else if (!post.getUser().getPhoto().equals("Not mentioned")){
             Picasso.get().load(post.getUser().getPhoto()).into(holder.imgViewProfile);

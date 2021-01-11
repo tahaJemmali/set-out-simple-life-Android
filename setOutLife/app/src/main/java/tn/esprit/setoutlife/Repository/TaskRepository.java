@@ -76,14 +76,14 @@ public class TaskRepository {
             object.put("deadline",task.getDeadline());
             object.put("reminder",task.getReminder());
             object.put("endTime",task.getEndTime());
-            object.put("schedule",false);
+            object.put("schedule",task.isSchedule());
             object.put("user",HomeActivity.getCurrentLoggedInUser().getId());
         } catch (JSONException e) {
             e.printStackTrace();
         }
         addPost(object,mcontext);
     }
-     public static void  getAllScheudles(Context mContext){
+    public static void  getAllScheudles(Context mContext){
 
         JsonObjectRequest request = new  JsonObjectRequest(Request.Method.GET, RetrofitClient.url + "/all_schedules/"+ HomeActivity.getCurrentLoggedInUser().getId(), null,
                 new Response.Listener<JSONObject>() {
@@ -137,21 +137,21 @@ public class TaskRepository {
                             tasks=new ArrayList<Task>();
                             String message = response.getString("message");
                             JSONArray jsonArray = response.getJSONArray("tasks");
-                           for (int i = 0; i < jsonArray.length(); i++) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject jsonTag = jsonArray.getJSONObject(i);
                                 String dateStr = jsonTag.getString("dateCreation");
                                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
                                 Date dateCreation = sdf.parse(dateStr);
-                               String dateStr2="";
-                               String dateStr3="";
-                               Date deadline =new Date();
-                               Date reminder =new Date();
-                               if( jsonTag.has("deadline") &&jsonTag.has("reminder")){
+                                String dateStr2="";
+                                String dateStr3="";
+                                Date deadline =new Date();
+                                Date reminder =new Date();
+                                if( jsonTag.has("deadline") &&jsonTag.has("reminder")){
                                     dateStr2 = jsonTag.getString("deadline");
                                     dateStr3 = jsonTag.getString("reminder");
                                     deadline = sdf.parse(dateStr2);
                                     reminder = sdf.parse(dateStr3);
-                               }
+                                }
                                 if (jsonTag.getBoolean("schedule") == true){
                                     Task t=new Task(jsonTag.getString("_id"),
                                             jsonTag.getString("taskName"),
@@ -196,7 +196,7 @@ public class TaskRepository {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-      addPost(object,mcontext);
+        addPost(object,mcontext);
     }
     static void addPost(JSONObject object,Context mcontext){
         // Enter the correct url for your api service site
@@ -254,6 +254,7 @@ public class TaskRepository {
                         }finally {
                             ScheduleFragment.global=schedules;
                             dialogg.dismiss();
+                            Log.e("TAG", "onResponse: " );
                             ScheduleFragment tagFrag = new ScheduleFragment();
                             fragmentManager
                                     .beginTransaction().replace(R.id.fragment_container, tagFrag, "Tasks")

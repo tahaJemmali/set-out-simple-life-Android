@@ -60,8 +60,13 @@ public class SettingsActivity extends AppCompatActivity {
     public static final String SETTINGS_KEY_SWITCH_NOTIFICATIONS = "SETTINGS_KEY_SWITCH_NOTIFICATIONS";
     public static final String SETTINGS_KEY_LIST_LANGUAGE_CHOICE = "SETTINGS_KEY_LIST_LANGUAGE_CHOICE";
 
-
     SharedPreferences settingsSharedPrefs;
+
+    CallBackInterface callBackInterface;
+
+    public void setCallBackInterface (CallBackInterface callBackInterface){
+        this.callBackInterface = callBackInterface;
+    }
 
     private static final int REQUEST_CODE_NOTIFICATION_PICKER = 1000;
     private Toast mToast;
@@ -75,6 +80,8 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
+        setCallBackInterface(HomeActivity.myContext);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -280,6 +287,7 @@ public class SettingsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
+        callBackInterface.popBackb();
     }
 
     private void makeToast(String message)

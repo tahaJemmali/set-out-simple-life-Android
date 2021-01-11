@@ -1,5 +1,6 @@
 package tn.esprit.setoutlife.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -49,13 +50,19 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     CircleImageView profilImageInNavBar;
     TextView tvNameInNavBar;
 
+    public static int last_nav_item;
+
     View header;
+
+    public static HomeActivity myContext;
 
     private static User CurrentLoggedInUser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        myContext = this;
 
     /************************ fragment manager ********************************/
         fragmentManager = getSupportFragmentManager();
@@ -117,8 +124,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
        // System.out.println(HomeActivity.getCurrentLoggedInUser().getPhoto());
     }
 
-
-
     private Bitmap getBitmapFromString(String image) {
 
         byte[] bytes = Base64.decode(image, Base64.DEFAULT);
@@ -179,6 +184,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case R.id.nav_settings:
                 //addSettingsFragment(null,true);
                 openSettingsActivity();
+                navigationView.setCheckedItem(last_nav_item);
             break;
             //case R.id.nav_notification:
                 //return false;
@@ -188,10 +194,10 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         return true;
     }
 
-    @Override
+    /*@Override
     public void NavButtonSelected() {
         drawerLayout.openDrawer(GravityCompat.START);
-    }
+    }*/
 
     private void openSettingsActivity(){
         Intent intent = new Intent(HomeActivity.this, SettingsActivity.class);
@@ -209,6 +215,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         homeFragment.setCallBackInterface(this);
         fragmentTransaction.replace(R.id.fragment_container,homeFragment);
         fragmentTransaction.commit();
+        last_nav_item = R.id.nav_home;
     }
 
     private void addProfilFragment(Bundle bundle,Boolean fromNavBar) {
@@ -219,6 +226,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
     }
+
     private void addScheduleFragment(Bundle bundle,Boolean fromNavBar) {
         fragmentTransaction = fragmentManager.beginTransaction();
         ScheduleFragment scheduleFragment = new ScheduleFragment();
@@ -226,6 +234,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container,scheduleFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        last_nav_item = R.id.nav_Schedule;
     }
 
     private void addFinanceFragment(Bundle bundle,Boolean fromNavBar) {
@@ -235,6 +244,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container,financeFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        last_nav_item = R.id.nav_Finance;
     }
 
     private void addForumFragment(Bundle bundle,Boolean fromNavBar) {
@@ -244,6 +254,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container,forumFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        last_nav_item = R.id.nav_Forum;
     }
 
     private void addSettingsFragment(Bundle bundle,Boolean fromNavBar) {
@@ -262,6 +273,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         fragmentTransaction.replace(R.id.fragment_container,taskFragment);
         if (!fromNavBar) fragmentTransaction.addToBackStack(null);
         fragmentTransaction.commit();
+        last_nav_item = R.id.nav_Tasks;
     }
 
     /*@Override
@@ -283,7 +295,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED);
         System.out.println("pop back interface ceolled in homeActivity");
         toggleFullscreen(false);
-
     }
 
     @Override
@@ -292,7 +303,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case "Profil":
                 openProfileActivity();
                 //toggleFullscreen(true);
-                navigationView.setCheckedItem(R.id.nav_Profil);
+                //navigationView.setCheckedItem(R.id.nav_Profil);
                 /*addProfilFragment(null,false);
                 toggleFullscreen(true);
                 navigationView.setCheckedItem(R.id.nav_Profil);*/
@@ -319,7 +330,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             case "Settings"://addSettingsFragment(null,false);
                 openSettingsActivity();
                 //toggleFullscreen(true);
-                navigationView.setCheckedItem(R.id.nav_settings);
+                //navigationView.setCheckedItem(R.id.nav_settings);
                 break;
             case "Tutorial":
                 Intent intent = new Intent(HomeActivity.this, welcome.class);
@@ -332,6 +343,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
 
         }
         drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED);
+    }
+
+    @Override
+    public void popBackb() {
+        navigationView.setCheckedItem(last_nav_item);
     }
 
     private void toggleFullscreen(boolean fullscreen)

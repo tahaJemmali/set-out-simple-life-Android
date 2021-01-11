@@ -152,4 +152,9 @@ public class NameActivity extends AppCompatActivity implements IRepository {
         finish();
     }
 
+    @Override
+    public void doAction2() {
+        //
+    }
+
 }

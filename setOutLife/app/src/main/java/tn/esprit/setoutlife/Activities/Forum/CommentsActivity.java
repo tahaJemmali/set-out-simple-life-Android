@@ -44,7 +44,8 @@ public class CommentsActivity extends AppCompatActivity implements TextWatcher, 
 
     private String name;
     private WebSocket webSocket;
-    private String SERVER_PATH = "ws://10.0.2.2:3001";
+    //private String SERVER_PATH = "ws://10.0.2.2:3001";
+    private String SERVER_PATH = "wss://setoutfahd.herokuapp.com";
     //private String SERVER_PATH = "ws://echo.websocket.org";
     private EditText messageEdit;
     private View sendBtn, pickImgBtn;
@@ -155,6 +156,11 @@ public class CommentsActivity extends AppCompatActivity implements TextWatcher, 
             e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 
 

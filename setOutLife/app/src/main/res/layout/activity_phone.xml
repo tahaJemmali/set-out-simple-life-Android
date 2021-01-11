@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/saveBtn"
-            android:background="@color/transparent"
+            android:background="@color/transparentF"
             android:onClick="cancelBtn"
             android:text="cancel" />
 
@@ -51,7 +51,7 @@
             android:id="@+id/saveBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/transparent"
+            android:background="@color/transparentF"
             android:onClick="saveBtn"
             android:text="save" />
     </LinearLayout>

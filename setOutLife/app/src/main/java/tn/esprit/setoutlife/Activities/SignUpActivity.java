@@ -137,7 +137,7 @@ public class SignUpActivity extends AppCompatActivity implements IRepository {
 
         if (!firstName.matches(namePattern))
         {
-            Toast.makeText(SignUpActivity.this,"Invalid last name!",Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUpActivity.this,"Invalid first name!",Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -153,8 +153,8 @@ public class SignUpActivity extends AppCompatActivity implements IRepository {
             return;
         }
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
-        if (!CustomSettingsObjectEditText.emailText.matches(emailPattern))
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z][a-z]+";
+        if (!email.matches(emailPattern))
         {
             Toast.makeText(SignUpActivity.this,"Invalid email address!",Toast.LENGTH_SHORT).show();
             return;
@@ -163,6 +163,12 @@ public class SignUpActivity extends AppCompatActivity implements IRepository {
         if (TextUtils.isEmpty(password))
         {
             Toast.makeText(SignUpActivity.this,"Password  cannot be empty!",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if (password.length()<8)
+        {
+            Toast.makeText(SignUpActivity.this,"Password must have at least 8 characters!",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -182,7 +188,7 @@ public class SignUpActivity extends AppCompatActivity implements IRepository {
 
         if (TextUtils.isEmpty(phone)){
             phone="Not mentioned";
-        }else if (phone.length()<8)
+        }else if (phone.length()!=8)
         {
             Toast.makeText(SignUpActivity.this,"Invalid phone number!",Toast.LENGTH_SHORT).show();
             return;
@@ -210,5 +216,10 @@ public class SignUpActivity extends AppCompatActivity implements IRepository {
     public void doAction() {
         setResult(RESULT_OK,intent);
         finish();
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 }

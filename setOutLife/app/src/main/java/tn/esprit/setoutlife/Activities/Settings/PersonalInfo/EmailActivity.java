@@ -99,7 +99,7 @@ public class EmailActivity extends AppCompatActivity implements IRepository {
             return;
         }
 
-        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+        String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z][a-z]+";
         if (!CustomSettingsObjectEditText.emailText.matches(emailPattern))
         {
             Toast.makeText(EmailActivity.this,"Invalid email address!",Toast.LENGTH_SHORT).show();
@@ -131,6 +131,11 @@ public class EmailActivity extends AppCompatActivity implements IRepository {
         //intent.putExtra("new_last_name",CustomSettingsObjectEditText.lastNameText);
         setResult(RESULT_OK, intent);
         finish();
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 
 }

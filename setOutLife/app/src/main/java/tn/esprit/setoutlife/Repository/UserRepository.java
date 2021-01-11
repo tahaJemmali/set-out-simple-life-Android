@@ -27,7 +27,8 @@ public class UserRepository {
     private static UserRepository instance;
 
    // private String baseURL = "http://10.0.2.2:3000";
-    private String baseURL = "https://set-out.herokuapp.com";
+   // private String baseURL = "https://set-out.herokuapp.com";
+    private String baseURL = "https://setoutfahd.herokuapp.com";
 
     private IRepository iRepository;
 
@@ -60,15 +61,19 @@ public class UserRepository {
                     public void onResponse(JSONObject response) {
                         try {
                             String message = response.getString("message");
+
+                            if (!message.equals("Login success"))
                             Toast.makeText(context,message,Toast.LENGTH_LONG).show();
-                            System.out.println("le test :");
+
+                            /*System.out.println("le test :");
                             System.out.println(message.equals("Login success"));
                             System.out.println("Login success");
-                            System.out.println(message);
+                            System.out.println(message);*/
 
                             if (message.equals("Login success")){
-                                iRepository.showLoadingButton();
                                 loadUserFromJson(email,context);
+                            }else{
+                                iRepository.showLoadingButton();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -122,6 +127,7 @@ public class UserRepository {
                             e.printStackTrace();
                         }finally{
                             iRepository.doAction();
+                            iRepository.showLoadingButton();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -272,7 +278,7 @@ public class UserRepository {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }finally{
-                            //iUserRepository.doAction();
+                            iRepository.doAction2();
                         }
                     }
                 }, new Response.ErrorListener() {

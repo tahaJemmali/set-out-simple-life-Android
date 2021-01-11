@@ -105,4 +105,9 @@ public class ForgetPasswordActivity extends AppCompatActivity implements IReposi
         Intent intent = new Intent(ForgetPasswordActivity.this, VerifyCodeActivity.class);
         startActivity(intent);
     }
+
+    @Override
+    public void doAction2() {
+        //
+    }
 }

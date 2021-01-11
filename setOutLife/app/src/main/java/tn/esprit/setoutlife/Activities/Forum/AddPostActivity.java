@@ -2,6 +2,7 @@ package tn.esprit.setoutlife.Activities.Forum;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -40,6 +42,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import tn.esprit.setoutlife.Activities.HomeActivity;
 import tn.esprit.setoutlife.R;
@@ -70,6 +75,7 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
     Uri image_uri = null;
     String image = "noImage";
     ProgressDialog pb;
+    private List<String> extensions = Arrays.asList("png", "jpg", "jpeg", "tif", "tiff", "bmp");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +138,7 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
 
                 }else{
                     uploadData(title,description,image);
+
                     System.out.println("image_uri==null22222222222222222222");
                 }
             }
@@ -169,7 +176,7 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
         String[] options = {"Camera", "Gallery"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Chose Image from");
+        builder.setTitle("Choose Image from");
         //set options to dialog
         builder.setItems(options, new DialogInterface.OnClickListener() {
             @Override
@@ -256,9 +263,9 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
                         Toast.makeText(this, "Camera & Storage both permissions are neccessary", Toast.LENGTH_LONG).show();
                     }
 
-                } else {
+                } /*else {
 
-                }
+                }*/
             }
             break;
             case STORAGE_REQUEST_CODE: {
@@ -282,20 +289,44 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
 
             if (requestCode == IMAGE_PICK_GALLERY_CODE){
                 image_uri = data.getData();
-                postImage.setImageURI(image_uri);
-            }else if(requestCode == IMAGE_PICK_CAMERA_CODE){
-                postImage.setImageURI((image_uri));
-            }
+            }/*else if(requestCode == IMAGE_PICK_CAMERA_CODE){
+
+            }*/
 
             try {
                 InputStream is = getContentResolver().openInputStream(image_uri);
                 Bitmap image = BitmapFactory.decodeStream(is);
+                //System.out.println(GetFileExtension(image_uri));
+                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                image.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+                byte[] imageInByte = stream.toByteArray();
+                long lengthbmp = imageInByte.length;
+
+                //System.out.println(((float)lengthbmp / 1024));
+                //System.out.println(((float)lengthbmp / (1024 * 1024)));
+
+                if (((float)lengthbmp / (1024 * 1024))>2.0)
+                Toast.makeText(AddPostActivity.this,"File size too large !",Toast.LENGTH_SHORT).show();
+                else if (!extensions.contains(GetFileExtension(image_uri)))
+                Toast.makeText(AddPostActivity.this,"Please select an image !",Toast.LENGTH_SHORT).show();
+                else
+                postImage.setImageURI(image_uri);
+
                 sendImage(image);
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    public String GetFileExtension(Uri uri)
+    {
+        ContentResolver contentResolver=getContentResolver();
+        MimeTypeMap mimeTypeMap=MimeTypeMap.getSingleton();
+
+        // Return file Extension
+        return mimeTypeMap.getExtensionFromMimeType(contentResolver.getType(uri));
     }
 
     private void sendImage(Bitmap image) {
@@ -338,5 +369,10 @@ public class AddPostActivity extends AppCompatActivity implements IRepository {
     public void doAction() {
         pb.dismiss();
         finish();
+    }
+
+    @Override
+    public void doAction2() {
+        //
     }
 }
