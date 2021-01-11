@@ -209,10 +209,19 @@ if(global != null){
                     public List<CalendarEvent> events(Calendar date) {
                         List<CalendarEvent> events = new ArrayList<>();
                         int count = rnd.nextInt(6);
+                        if (global!=null){
+                            ArrayList projects = new ArrayList<Project>();
+                                for (Project row : global) {
+                                    if (row.getDateCreated().getDay() == date.getTime().getDay())
+                                        projects.add(row);
 
-                        for (int i = 0; i <= count; i++) {
-                            events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
-                        }
+                                }
+                                count = projects.size();
+
+                            }
+                            for (int i = 0; i < count; i++) {
+                                events.add(new CalendarEvent(Color.rgb(rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256)), "event"));
+                            }
 
                         return events;
                     }
