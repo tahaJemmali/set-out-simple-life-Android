@@ -250,6 +250,7 @@ public class TaskFragment extends Fragment {
                 }
 
                 selectedDate=date.getTime();
+                
                 tvCurrentSelectedDate.setText(DateFormat.format("EEEE,  MMMM  d,  yyyy", date));
                 tvCurrentSelectedMonth.setText(DateFormat.format("MMMM", date));
             }
