@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/pacifico"
-        android:text="Commun Task"
+        android:text="Achieve your goals"
         android:textColor="#FFFFFF"
         android:layout_gravity="center"
         android:textSize="35dp" />
@@ -34,11 +34,12 @@
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TextView"
-            android:textColor="@color/black"
+            android:layout_height="198dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginVertical="20dp"/>
+            android:layout_marginVertical="20dp"
+            android:text="@string/commun_task"
+            android:textSize="18dp"
+            android:textColor="@color/black" />
     </LinearLayout>
 
     <Button

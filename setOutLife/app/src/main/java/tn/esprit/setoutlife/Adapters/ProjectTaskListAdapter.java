@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import tn.esprit.setoutlife.R;
@@ -35,9 +36,11 @@ public class ProjectTaskListAdapter extends RecyclerView.Adapter<ProjectTaskList
 
     @Override
     public void onBindViewHolder(@NonNull ProjectTaskHolder holder, int position) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
         Task task = tasks.get(position);
-
-        holder.taskName.setText(task.getTaskName());
+        holder.taskId.setText("#"+task.getId().substring(0,3));
+        holder.taskNote.setText(task.getTaskName());
+        holder.taskName.setText(formatter.format(task.getDateCreation()));
         holder.deadlineTask.setText(task.getNote());
         holder.tagColorInTask.getBackground().mutate().setColorFilter(Color.parseColor("#f08676"), PorterDuff.Mode.SRC_ATOP);
     }

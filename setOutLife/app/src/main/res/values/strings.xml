@@ -15,6 +15,11 @@
         <string name="title_activity_email">EmailActivity</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="commun_task">Everyone suggests other than the person lack motivation, or directly suggests the person remain motivated. But, no one ever tells what is the motivation of how one can stay motivated. Motivation means to face the obstacle and find an inspiration that helps you to go through tough times. In addition, it helps you to move further in life.</string>
+    <string name="finance">“When money realizes that it is in good hands, it wants to stay and multiply in those hands.” “The more your money works for you, the less you have to work for money.” “Money is always eager and ready to work for anyone who is ready to employ it.”</string>
+    <string name="gain">To explain it well, "no pain, no gain"! Endure the pain and make a difference!” “The reason you\'re going through what you\'re going through is to receive the things you\'ve been praying for.” Often the thing that brings you the most pain is the very thing that will lead you to the most gain and your breakthrough.”</string>
+    <string name="project">Life as a project manager can be tough; if anyone needs inspiration to keep going with leading our projects and teams, it’s us. When you find yourself (or your project) constantly slamming into one brick wall after another it can be tough to stay positive and focussed.</string>
+    <string name="add_task">The road to your dreams isn’t always easy to navigate, sometimes dotted with mountains to climb, obstacles to overcome—and hard, mind-numbing times that will make you feel like quitting. Just remember this if you get lost along the way: Anything worth having doesn’t come easy. So don’t turn back around. Don’t give up.</string>
 
     <string-array name="tags">
         <item>Array Item One</item>
