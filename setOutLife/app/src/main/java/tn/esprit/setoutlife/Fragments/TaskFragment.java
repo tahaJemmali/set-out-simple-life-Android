@@ -241,7 +241,6 @@ if(global != null){
                     for (Project row : global) {
                        int diff= row.getDateCreated().getDay()- date.getTime().getDay();
 
-
                         if (diff==0)
                             projects.add(row);
                     }

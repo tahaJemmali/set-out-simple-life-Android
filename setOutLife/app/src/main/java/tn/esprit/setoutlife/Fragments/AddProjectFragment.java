@@ -97,7 +97,7 @@ public class AddProjectFragment extends Fragment {
                         j++;
                     }
                     Project p=new Project("dddd",projectNameEditText.getText().toString(),
-                            description.getText().toString(),tasks,new Date(),global.get(tagsPicker.getSelectedItemPosition()));
+                            description.getText().toString(),tasks,TaskFragment.selectedDate,global.get(tagsPicker.getSelectedItemPosition()));
                     final ProgressDialog dialogg = ProgressDialog.show(mContext
                             , "","Loading..Wait.." , true);
                     dialogg.show();
